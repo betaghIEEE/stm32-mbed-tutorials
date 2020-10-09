@@ -42,7 +42,8 @@ int main()
         while (button == 0);
 
         time.stop();
-        reactionMilliseconds = time.elapsed_time().count();
+        reactionMilliseconds = time.elapsed_time().count() / 1000;
+        
 
         printf("\n\rIt took you %d microseconds to press the button after the blink.", reactionMilliseconds);
         fflush(stdout);
