@@ -1,7 +1,8 @@
 #include "mbed.h"
 #include "basicIOCmd.h"
+#include <cstdio>
 
-AnalogIn ain(PA_0);
+AnalogIn ain(PA_3);
 
 // main() runs in its own thread in the OS
 int main()
@@ -10,7 +11,7 @@ int main()
     homescr();
     clrscr();
     float voltage = 0.0;
-    int adcValue = 0;
+    unsigned short adcValue = 0;
     float voltReadValue = 0.0;
 
     printf("\n\r Voltmeter.");
@@ -20,15 +21,17 @@ int main()
 
         // Read the analog input voltage as a digital value
         adcValue = ain.read_u16();
-        printf("\nThe value at A0 = %d. \n", adcValue);
+        printf("\nThe value at A0 = %x. \n", adcValue);
         fflush(stdout);
         // Convert the reading into voltage in mV
-        voltage = ain.read_voltage();
+        voltage = ain.read();
         voltReadValue = ain.read();
 
 
         // Display the voltage in mV
-        printVoltage(voltReadValue);
+        printVoltage(voltage);
+        printf(" -------   ");
+
 
         wait_seconds(1);
     }

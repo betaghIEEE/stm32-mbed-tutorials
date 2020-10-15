@@ -67,7 +67,7 @@ void printVoltage(float t )
 {
 
             gotoscr(8, 3);
-            int count = floor(t * 100000);
-            printf("The Voltage is %.4f  aka %d", t, count );
+            int count = floor(t * 1000);
+            printf("The Voltage is %d", count );
             fflush(stdout);
 }

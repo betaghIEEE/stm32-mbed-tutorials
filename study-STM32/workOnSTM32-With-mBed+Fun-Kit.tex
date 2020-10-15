@@ -1,0 +1,146 @@
+% !TEX TS-program = xelatex
+%
+% Created by Daniel Beatty on 2020-09-25.
+% Copyright (c) 2020 All Night Star Party.
+\documentclass{article}
+
+\usepackage{polyglossia}
+\usepackage{hyperref}
+
+\hypersetup
+{
+  pdftitle   = {Working Electrical Engineering Projects with STM32 + Fun Kit},
+  pdfsubject = {Electrical Engineering, Computer Science, Embedded Computing},
+  pdfauthor  = {Daniel Beatty}
+}
+
+\title{Working Electrical Engineering Projects with STM32 + Fun Kit}
+\author{Daniel Beatty}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\section{Introduction}
+
+
+Why am I doing this?  I have some examples provided by a client of mine.  These might have worked in some STM32 development environments.  However, software evolves to meet hardware and security needs.  I suspect that I am not alone.  
+
+I would prefer to have a cross platform means to develop software. I would prefer the ability to analyze the kernels deployed on these devices.  I would like to ensure that I can deliver a good product, and apply micro and macro architectures (aka design patterns) as well good algorithms.  
+
+So, I want to know how this mBed system work.  I will start with the STM32 product line to develop this micro-architecture approach.  
+
+I plan to demostrate these techiniques on MacOS, Windows, and Linux (ARM).
+
+\section{The Base Line Integrated Development Environment Part 1} % (fold)
+\label{sec:the_base_line_integrated_development_environment_part_1}
+
+Big issues: 
+1. Basic Operation of the IDE\footnote{https://os.mbed.com}
+2. Combining packages
+	Especially the mbed OS itself
+	Libraries and Frameworks
+	The ``tiny interactions''
+	The communication mechanisms.
+
+Mbed Studios (a modified Eclipse Theia) released in June 2019.  It is derived from the Eclipse `Theia' line shown in a YouTube video\footnote{https://www.youtube.com/watch?v=HsTtzqL-GP8}.
+
+The mBed website carries white paper references for each of the boards it supports.  For example, this piece focuses on the Nucleo-F413ZH\footnote{https://os.mbed.com/platforms/ST-Nucleo-F413ZH/}.  
+
+Some of the main library sources from STM are provided on the STM32f4 Discovery web site\footnote{http://stm32f4-discovery.net/2014/05/all-stm32f429-libraries-at-one-place/} forum.  
+
+The Nucleo-F413ZH does not have a direct ethernet connection, but resources like this GitHub repository \footnote{https://github.com/khoih-prog/EthernetWebServer_STM32/tree/master/src/detail} suggest that there are ways to make it work.
+
+% section the_base_line_integrated_development_environment_part_1 (end)
+
+\section{Work on Timer and Flushing The STDOUT} % (fold)
+\label{sec:work_on_timer_and_flushing_the_stdout}
+
+In cases where we ask the process to wait, we should ensure that the I/O pipe empties.  Otherwise, we have no idea when this process takes place.  It can occur in the wrong times.
+
+Also, the timer's have issue with floating point numbers.
+
+Lastly, the STDIO has trouble with printing floats.   
+
+% section work_on_timer_and_flushing_the_stdout (end)
+
+
+\section{Eight Bit Shift Register} % (fold)
+\label{sec:eight_bit_shift_register}
+
+Eight bit Shifter IC 74HC595 
+
+
+% section eight_bit_shift_register (end)
+
+\section{Optical Isolation} % (fold)
+\label{sec:optical_isolation}
+
+I remember a lesson from my embedded computing class back in the Spring of 1998.  Professors Darrel Vines, Michael Parton, and Mike Giesselman told us over and over about the importance of optical isolation.  These professors worked in pulsed power, and I wish I had the wisdom back then to realize just how important this subject is.  % and literally how much power goes into such devices.  
+
+Pulsed Power delivers a large amount of current in a very short space and time.  The amount of current involved can easily melt a microcontroller and destroy it.  Yet, these controllers are essential in regulating such power elements to fulfill their purpose.  
+
+The fun kit comes with a 4N35 white paper can be found at\footnote{https://www.digchip.com/datasheets/parts/datasheet/161/4N35-pdf.php}. The inputs on pins 1 and 2 can be thought of as in and out for a light emitting diode (LED).  The light from the LED feeds a photo-transistor that can handle much higher currents. 
+
+% section optical_isolation (end)
+
+\section{Transistor Circuits} % (fold)
+\label{sec:transistor_circuits}
+
+PN2222
+
+Transistor
+
+
+% section transistor_circuits (end)
+
+\section{Diode Circuits} % (fold)
+\label{sec:diode_circuits}
+
+This is a basic hello world type program.  A programmer can build this blinky world program for the on board LED or a circuit example.
+
+
+% section diode_circuits (end)
+
+\section{Simple Analog In} % (fold)
+\label{sec:simple_analog_in}
+
+The terms simple and analog rare work together in practice.  This work shows examples to highlight how the analog to digital converter works,  distinction when an optical isolator, and safety mechanisms to protect your micro-controller from damage.
+
+%We can make a simple analog example using the parts in the Fun Kit.   We design the circuit to have very little current.  
+
+% section simple_analog_in (end)
+
+\section{Thermo-resistor - Taking the Temperature} % (fold)
+\label{sec:thermo_resistor_taking_the_temperature}
+
+This is an example of an Analog in problem
+
+
+% section thermo_resistor_taking_the_temperature (end)
+
+\section{Ethernet Web Server Libraries} % (fold)
+\label{sec:ethernet_web_server_libraries}
+
+\footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32}
+
+
+
+% section ethernet_web_server_libraries (end)
+
+\section{Digital Signal Processing} % (fold)
+\label{sec:digital_signal_processing}
+
+\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}
+
+
+
+
+% section digital_signal_processing (end)
+
+
+\end{document}
