@@ -108,3 +108,6 @@ study-STM32/workOnSTM32-With-mBed+Fun-Kit.synctex.gz
 study-STM32/workOnSTM32-With-mBed+Fun-Kit.aux
 study-STM32/workOnSTM32-With-mBed+Fun-Kit.log
 study-STM32/workOnSTM32-With-mBed+Fun-Kit.out
+study-STM32/.workOnSTM32-With-mBed+Fun-Kit.lb
+basicThermeter-textbook-example/mbed-os.lib
+basicThermeter-textbook-example/.gitignore

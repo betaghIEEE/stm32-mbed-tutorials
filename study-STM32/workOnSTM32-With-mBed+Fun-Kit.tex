@@ -53,7 +53,7 @@ The mBed website carries white paper references for each of the boards it suppor
 
 Some of the main library sources from STM are provided on the STM32f4 Discovery web site\footnote{http://stm32f4-discovery.net/2014/05/all-stm32f429-libraries-at-one-place/} forum.  
 
-The Nucleo-F413ZH does not have a direct ethernet connection, but resources like this GitHub repository \footnote{https://github.com/khoih-prog/EthernetWebServer_STM32/tree/master/src/detail} suggest that there are ways to make it work.
+The Nucleo-F413ZH does not have a direct ethernet connection, but resources like this GitHub repository \footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32/tree/master/src/detail} suggest that there are ways to make it work.
 
 % section the_base_line_integrated_development_environment_part_1 (end)
 
@@ -109,9 +109,29 @@ This is a basic hello world type program.  A programmer can build this blinky wo
 \section{Simple Analog In} % (fold)
 \label{sec:simple_analog_in}
 
-The terms simple and analog rare work together in practice.  This work shows examples to highlight how the analog to digital converter works,  distinction when an optical isolator, and safety mechanisms to protect your micro-controller from damage.
+The terms simple and analog rare work together in practice.  This work shows examples to highlight how the analog to digital converter (ADC) works,  distinction when an optical isolator, and safety mechanisms to protect your micro-controller from damage.
 
 %We can make a simple analog example using the parts in the Fun Kit.   We design the circuit to have very little current.  
+
+I learned to look up the pin name and its location on the board.   There pin names that don't necessarily correspond to the label next pin itself.  The A0 pin on the CN9 pin set is actually PA\_3.  It is easy to make the mistake in calling this pin PA\_0.   This distinction can lead to massive mistakes and cause to operate the board in a wrong manner.  
+
+To demonstrate simple ADC in, I use a simple voltage divider circuit with three resistors.  Voltage is proportial to resistance.  Therefore, we can measure voltage across a resistor and expect its value.  That proportion should change if we can the resistance of one of the other resistors.  
+
+Therefore, I establish this measurement across a constant 330 $\omega$ resistor.  Then, I do similar across a 330 $\omega$ potentiometer.  We see the voltage go from $V_{in}$.  This helps establish a baseline for comparing the ADC readings.   
+
+I built the circuit with parts acquired from \footnote{http://www.rexqualis.com/products/}.  The fun kit \footnote{http://www.rexqualis.com/product/electronics-component-fun-kit-w-power-supply-module-male-to-female-jumper-wire-830-tie-points-breadboard-precision-potentiometer-resistor-for-arduino-raspberry-pi-stm32/} 
+provides many of the resistors I need.   The UNO Project starter \footnote{http://www.rexqualis.com/product/uno-project-super-starter-kit-for-arduino-w-uno-r3-development-board-detailed-tutorial/} provides some addition parts that I can use later.  Also the UNO Project starter provides a Arduino UNO that I can use for comparison.  Lastly, I used some competitor products to provide the potentiometers and inductors that I need for future examples.  
+
+
+Also, it is important to note a fix on stdio.  Mbed.os by default turns off floating point parameters in stdio/UART\footnote{https://github.com/ARMmbed/mbed-os/blob/master/platform/source/minimal-printf/README.md}.  
+There is a parameter in platform/mbed\_app.json.  By default, a new mbed project has the value for `minimum-printf-enable-floating-point' set to false.  In order to print out floating point, this value needs to be set to true.  
+
+With this, we can see in the example that the voltage read from the potenimeter is pretty close to what a common multimeter reads.  There are adjustment factors that we apply to give a rough calibration.  For production, it would help to obtain a more calibrated set of values.  
+
+We see a similar case with thermister based thermometers.  I set up a simple $330\omega$ resistor in series with a thermister out of the fun kit.  Here we can measure the voltage across the thermister.  We then can measure ratios and offsets for temperature.  
+\begin{equation}
+	T = \frac{(mV - 225.0)}{10.0}
+\end{equation}
 
 % section simple_analog_in (end)
 
@@ -126,7 +146,7 @@ This is an example of an Analog in problem
 \section{Ethernet Web Server Libraries} % (fold)
 \label{sec:ethernet_web_server_libraries}
 
-\footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32}
+%\footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32}
 
 
 
@@ -135,7 +155,7 @@ This is an example of an Analog in problem
 \section{Digital Signal Processing} % (fold)
 \label{sec:digital_signal_processing}
 
-\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}
+%\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}
 
 
 

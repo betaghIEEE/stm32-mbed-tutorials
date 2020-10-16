@@ -1,18 +1,13 @@
 #include "basicIOCmd.h"
 
-#include "BufferedSerial.h"
 #include "mbed.h"
-#include "unity_internals.h"
 
 //
 // Clear the screen
 //
 
-BufferedSerial myPC(USBTX, USBRX, 9600);
 
 #define BLINKING_RATE_MS                                                    1000
-#define BUFFER_SIZE                                         1000
-
 
 
 extern void wait_seconds (int seconds){
@@ -73,13 +68,6 @@ void printVoltage(float t )
 
             gotoscr(8, 3);
             int count = floor(t * 1000);
-            printf("The Voltage is %d  try %5.3f", count, t );
-            
-            char buffer[BUFFER_SIZE];
-
-            
-
-
-
+            printf("The Voltage is %d", count );
             fflush(stdout);
 }
