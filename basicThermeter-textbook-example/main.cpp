@@ -18,7 +18,7 @@ int main()
     unsigned short adcValue = 0;
     float voltReadValue = 0.0;
     unsigned short tempValue = 0;
-    double mv, T; 
+    double mv, T, tf ; 
 
     printf("\n\r Voltmeter.");
     printf("\n\r =========");
@@ -26,21 +26,22 @@ int main()
     while (true) {
 
         // Read the analog input voltage as a digital value
-        adcValue = ain.read_u16();
+        //adcValue = ain.read_u16();
         tempValue = temp.read_u16();
 
-        printf("\nThe value at A3 = %x.  A0 = %x  A0 = %5.3f\n  Temp at A0 = %5.3f.", adcValue, tempValue, mv, T);
+        gotoscr(4, 3);
+        printf("\nA0 = %x  A0 = %5.3f\n  Temp at A0 = %5.3f.", tempValue, mv, T);
+        printf("\nThe temperature in Farenhieght is %5.3f.", tf);
         fflush(stdout);
         // Convert the reading into voltage in mV
-        voltage = ain.read() * 3300.0f;
-        voltReadValue = ain.read();
+        //voltage = ain.read() * 3300.0f;
         mv = temp.read() * 3300.0f;
-        T= (mv +225.0f ) / 10.0f;
+        T= (mv +245.0f ) / 10.0f;
+        tf = T * 9.0f/5.0f + 32.0f;
 
 
-        // Display the voltage in mV
-        printVoltage(voltage);
-        printf(" -------   ");
+        printf("\n -------   ");
+
 
 
         wait_seconds(1);

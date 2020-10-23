@@ -36,78 +36,124 @@ So, I want to know how this mBed system work.  I will start with the STM32 produ
 
 I plan to demostrate these techiniques on MacOS, Windows, and Linux (ARM).
 
+\newpage
 \section{The Base Line Integrated Development Environment Part 1} % (fold)
 \label{sec:the_base_line_integrated_development_environment_part_1}
 
-Big issues: 
-1. Basic Operation of the IDE\footnote{https://os.mbed.com}
-2. Combining packages
-	Especially the mbed OS itself
-	Libraries and Frameworks
-	The ``tiny interactions''
-	The communication mechanisms.
+The Eclipse Foundation and Advanced RISC Machines(ARM) consortium work together to produce an Integrated Development Environment(IDE)\footnote{https://os.mbed.com} to fulfill needs of micro-controller developers.  The development community needs build services and IDE systems to handle the complex builds. %that include the real-time operating system (RTOS) itself and supplimental main purpose software.  %This capability follows in the footsteps of many micro-controllers that came before, and enables a new generation of makers.
+
+The Advanced RISC Machines (ARM) Limited developed the mBedOS to exhibit standard features amongst various manufactures builds.  Thus, I can develop a simple program and compile it for many different boards, and it still works. 
 
 Mbed Studios (a modified Eclipse Theia) released in June 2019.  It is derived from the Eclipse `Theia' line shown in a YouTube video\footnote{https://www.youtube.com/watch?v=HsTtzqL-GP8}.
 
-The mBed website carries white paper references for each of the boards it supports.  For example, this piece focuses on the Nucleo-F413ZH\footnote{https://os.mbed.com/platforms/ST-Nucleo-F413ZH/}.  
+ARM made the mBed Suite \footnote{https://os.mbed.com/studio/} based on Eclipse Theia  \footnote{https://youtu.be/NLkQzx6rrnU \\https://www.youtube.com/channel/UCXu7pV552EkR99mCzjwGvTQ/featured}.  This IDE supports inclusion of the mBed OS itself in a build and any additional libraries required to construct a software product for the ARM based boards.  These libraries include:
+\begin{itemize}
+	\item `Tiny interactions'
+	\item Communication mechanisms
+	\item Hardware Abstraction Layer(s)
+\end{itemize}
+
+
+
+ARM supplies a tutorial on installing the mBed Theia environment on MS Windows 10\footnote{https://os.mbed.com/teams/ST-Americas-mbed-Team/wiki/Getting-Started-with-mbed-and-the-STM32F}.  We will examine Mac and Windows on Intel processor machines.   For example, I develop embedded software on a MacBook Pro and also demonstrate with a Mac Min running MS Windows with bootcamp.  This work also seeks to produce Raspberry Pi and iPad tools to augment the STM Micro-controllers.  %\textbf{I} will also attempt to set up the mBed Studio on a Raspberry Pi.   What would be useful is to establish a Jenkins + Version control + Testing + Distribution suite for these applications.  
+
+
+\subsection{Creating or Importing a Program} % (fold)
+\label{sub:creating_or_importing_a_program}
+
+\footnote{https://os.mbed.com/docs/mbed-studio/current/create-import/index.html}
+
+% subsection creating_or_importing_a_program (end)
+
+\subsection{Importing Libraries} % (fold)
+\label{sub:importing_libraries}
+
+\footnote{https://os.mbed.com/docs/mbed-studio/current/manage-libraries/index.html#importing-a-library}
+
+% subsection importing_libraries (end)
+
+\subsection{Hardware Abstraction Layer(s)} % (fold)
+\label{sub:hardware_abstraction_layer_s}
+
+\footnote{https://os.mbed.com/questions/53876/CMSIS-vs-STM32CUBEHAL-vs-MBED/}
+
+
+
+
+The mBed website carries white paper references for each of the boards it supports.  For example, this piece focuses on the Nucleo-F413ZH\footnote{https://os.mbed.com/platforms/ST-Nucleo-F413ZH/}.  This platform and others can be found at \footnote{https://os.mbed.com/platforms/}.
+Alternative cards include:
+\begin{itemize}
+	\item Discovery F413H \footnote{https://os.mbed.com/platforms/ST-Discovery-F413H/}
+	\item Nucleo L4R5ZI-P \footnote{https://os.mbed.com/platforms/ST-Nucleo-L4R5ZI-P/}
+	\item Nucleo WB55RG \footnote{https://os.mbed.com/platforms/ST-Nucleo-WB55RG/}
+\end{itemize}
 
 Some of the main library sources from STM are provided on the STM32f4 Discovery web site\footnote{http://stm32f4-discovery.net/2014/05/all-stm32f429-libraries-at-one-place/} forum.  
 
-The Nucleo-F413ZH does not have a direct ethernet connection, but resources like this GitHub repository \footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32/tree/master/src/detail} suggest that there are ways to make it work.
+%The Nucleo-F413ZH does not have a direct ethernet connection, but resources like this GitHub repository \footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32/tree/master/src/detail} suggest that there are ways to make it work.
 
-% section the_base_line_integrated_development_environment_part_1 (end)
+% subsection hardware_abstraction_layer_s (end)
 
-\section{Work on Timer and Flushing The STDOUT} % (fold)
-\label{sec:work_on_timer_and_flushing_the_stdout}
+\subsection{ST Microelectronics Libraries} % (fold)
+\label{sub:st_microelectronics_libraries}
+
+\footnote{https://www.st.com/content/st\_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32-standard-peripheral-libraries/stsw-stm32065.html}
+
+
+\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}
+
+
+% subsection st_microelectronics_libraries (end)
+
+
+\section{Basic Hard Tools} % (fold)
+\label{sec:basic_hard_tools}
+
+\subsection{Work on Timer} % (fold)
+\label{sub:work_on_timer}
 
 In cases where we ask the process to wait, we should ensure that the I/O pipe empties.  Otherwise, we have no idea when this process takes place.  It can occur in the wrong times.
+
+There are third party USB drivers such as \footnote{https://os.mbed.com/users/gte1/code/STM32\_USBDevice/}.
 
 Also, the timer's have issue with floating point numbers.
 
 Lastly, the STDIO has trouble with printing floats.   
 
-% section work_on_timer_and_flushing_the_stdout (end)
+% subsection work_on_timer (end)
 
+\subsection{Flushing The Standard Input Output} % (fold)
+\label{sub:flushing_the_standard_input_output}
 
-\section{Eight Bit Shift Register} % (fold)
-\label{sec:eight_bit_shift_register}
+% subsection flushing_the_standard_input_output (end)
 
-Eight bit Shifter IC 74HC595 
+% section basic_hard_tools (end)
 
+\subsection{Blinky} % (fold)
+\label{sub:blinky}
 
-% section eight_bit_shift_register (end)
-
-\section{Optical Isolation} % (fold)
-\label{sec:optical_isolation}
-
-I remember a lesson from my embedded computing class back in the Spring of 1998.  Professors Darrel Vines, Michael Parton, and Mike Giesselman told us over and over about the importance of optical isolation.  These professors worked in pulsed power, and I wish I had the wisdom back then to realize just how important this subject is.  % and literally how much power goes into such devices.  
-
-Pulsed Power delivers a large amount of current in a very short space and time.  The amount of current involved can easily melt a microcontroller and destroy it.  Yet, these controllers are essential in regulating such power elements to fulfill their purpose.  
-
-The fun kit comes with a 4N35 white paper can be found at\footnote{https://www.digchip.com/datasheets/parts/datasheet/161/4N35-pdf.php}. The inputs on pins 1 and 2 can be thought of as in and out for a light emitting diode (LED).  The light from the LED feeds a photo-transistor that can handle much higher currents. 
-
-% section optical_isolation (end)
-
-\section{Transistor Circuits} % (fold)
-\label{sec:transistor_circuits}
-
-PN2222
-
-Transistor
-
-
-% section transistor_circuits (end)
-
-\section{Diode Circuits} % (fold)
-\label{sec:diode_circuits}
 
 This is a basic hello world type program.  A programmer can build this blinky world program for the on board LED or a circuit example.
 
+% subsection blinky (end)
 
-% section diode_circuits (end)
+\subsection{Eight Bit Shift Register} % (fold)
+\label{sub:eight_bit_shift_register}
 
-\section{Simple Analog In} % (fold)
-\label{sec:simple_analog_in}
+
+Eight bit Shifter IC 74HC595 
+
+% subsection eight_bit_shift_register (end)
+
+% section the_base_line_integrated_development_environment_part_1 (end)
+
+
+\section{Analog to Digital Conversion} % (fold)
+\label{sec:analog_to_digital_conversion}
+
+\subsection{Simple Analog In - Voltmeter} % (fold)
+\label{sub:simple_analog_in_voltmeter}
+
 
 The terms simple and analog rare work together in practice.  This work shows examples to highlight how the analog to digital converter (ADC) works,  distinction when an optical isolator, and safety mechanisms to protect your micro-controller from damage.
 
@@ -133,20 +179,106 @@ We see a similar case with thermister based thermometers.  I set up a simple $33
 	T = \frac{(mV - 225.0)}{10.0}
 \end{equation}
 
-% section simple_analog_in (end)
+% subsection simple_analog_in_voltmeter (end)
 
-\section{Thermo-resistor - Taking the Temperature} % (fold)
-\label{sec:thermo_resistor_taking_the_temperature}
+
+\subsection{Change Flashing Rate with Potentiometer} % (fold)
+\label{sub:change_flashing_rate_with_potentiometer}
+
+
+
+% subsection change_flashing_rate_with_potentiometer (end)
+
+\subsection{Thermostat} % (fold)
+\label{sub:thermostat}
+
+% subsection thermostat (end)
+
+\subsection{Light Meter} % (fold)
+\label{sub:light_meter}
+
+% subsection light_meter (end)
+
+\subsection{Thermo-resistor -Taking the Temperature} % (fold)
+\label{sub:thermo_resistor_taking_the_temperature}
 
 This is an example of an Analog in problem
 
 
-% section thermo_resistor_taking_the_temperature (end)
+% subsection thermo_resistor_taking_the_temperature (end)
+
+\subsection{Sound Level Meter} % (fold)
+\label{sub:sound_level_meter}
+
+% subsection sound_level_meter (end)
+
+
+% section analog_to_digital_conversion (end)
+
+
+\section{Analog Out} % (fold)
+\label{sec:analog_out}
+
+\subsection{Fixed Voltage} % (fold)
+\label{sub:fixed_voltage}
+
+% subsection fixed_voltage (end)
+
+\subsection{Sawtooth} % (fold)
+\label{sub:sawtooth}
+
+% subsection sawtooth (end)
+
+\subsection{Sine Wave Generator} % (fold)
+\label{sub:sine_wave_generator}
+
+% subsection sine_wave_generator (end)
+
+
+\subsection{Combining the Capabilites of Each Wave Generator Type} % (fold)
+\label{sub:combining_the_capabilites_of_each_wave_generator_type}
+
+% subsection combining_the_capabilites_of_each_wave_generator_type (end)
+
+\subsection{Buzzer Fun} % (fold)
+\label{sub:buzzer_fun}
+
+% subsection buzzer_fun (end)
+
+\subsection{Pulse Width Modulated Buzzers} % (fold)
+\label{sub:pulse_width_modulated_buzzers}
+
+% subsection pulse_width_modulated_buzzers (end)
+
+% section analog_out (end)
+
+
+\section{Optical Isolation} % (fold)
+\label{sec:optical_isolation}
+
+I remember a lesson from my embedded computing class back in the Spring of 1998.  Professors Darrel Vines, Michael Parton, and Mike Giesselman told us over and over about the importance of optical isolation.  These professors worked in pulsed power, and I wish I had the wisdom back then to realize just how important this subject is.  % and literally how much power goes into such devices.  
+
+Pulsed Power delivers a large amount of current in a very short space and time.  The amount of current involved can easily melt a microcontroller and destroy it.  Yet, these controllers are essential in regulating such power elements to fulfill their purpose.  
+
+The fun kit comes with a 4N35 white paper can be found at\footnote{https://www.digchip.com/datasheets/parts/datasheet/161/4N35-pdf.php}. The inputs on pins 1 and 2 can be thought of as in and out for a light emitting diode (LED).  The light from the LED feeds a photo-transistor that can handle much higher currents. 
+
+% section optical_isolation (end)
+
+\section{Transistor Circuits} % (fold)
+\label{sec:transistor_circuits}
+
+PN2222
+
+Transistor
+
+
+% section transistor_circuits (end)
+
 
 \section{Ethernet Web Server Libraries} % (fold)
 \label{sec:ethernet_web_server_libraries}
 
-%\footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32}
+\footnote{https://github.com/khoih-prog/EthernetWebServer\_STM32}
 
 
 
@@ -155,12 +287,35 @@ This is an example of an Analog in problem
 \section{Digital Signal Processing} % (fold)
 \label{sec:digital_signal_processing}
 
-%\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}
+\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}
 
 
 
 
 % section digital_signal_processing (end)
 
+
+\section{Secure Digital Block Devices} % (fold)
+\label{sec:secure_digital_block_devices}
+
+%\footnote{https://github.com/Ralim/stm32-libraries}
+
+% section secure_digital_block_devices (end)
+
+
+\section{Home Made RADAR} % (fold)
+\label{sec:home_made_radar}
+
+
+%\footnote{https://os.mbed.com/users/vhx/code/Nucleo\_radar/}
+
+% section home_made_radar (end)
+
+\section{Registering the Serial Number} % (fold)
+%\label{sec:registering_the_serial_number}
+
+%\footnote{https://forums.mbed.com/t/accessing-device-serial-number-stm32f4xx-chips-for-example/8120}
+
+% section registering_the_serial_number (end)
 
 \end{document}
