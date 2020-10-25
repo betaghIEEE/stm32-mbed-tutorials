@@ -58,24 +58,22 @@ ARM made the mBed Suite \footnote{https://os.mbed.com/studio/} based on Eclipse 
 ARM supplies a tutorial on installing the mBed Theia environment on MS Windows 10\footnote{https://os.mbed.com/teams/ST-Americas-mbed-Team/wiki/Getting-Started-with-mbed-and-the-STM32F}.  We will examine Mac and Windows on Intel processor machines.   For example, I develop embedded software on a MacBook Pro and also demonstrate with a Mac Min running MS Windows with bootcamp.  This work also seeks to produce Raspberry Pi and iPad tools to augment the STM Micro-controllers.  %\textbf{I} will also attempt to set up the mBed Studio on a Raspberry Pi.   What would be useful is to establish a Jenkins + Version control + Testing + Distribution suite for these applications.  
 
 
-\subsection{Creating or Importing a Program} % (fold)
-\label{sub:creating_or_importing_a_program}
+\subsection{ST Microelectronics Libraries} % (fold)
+\label{sub:st_microelectronics_libraries}
 
-\footnote{https://os.mbed.com/docs/mbed-studio/current/create-import/index.html}
+ST Microelectronics started as a French company.  It operates out of many nations.  In addition to producing the micro-controller boards themselves, they also produce support libaries for their boards\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}.  For example, ST Microelectronics is not the first manufacturer to produce ARM based digital signal processor (DSP)\footnote{https://www.st.com/content/st\_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32-standard-peripheral-libraries/stsw-stm32065.html}.  DSP engines provide a similar acceleration to vector / array math operations that a graphics processor units (GPU) provides to two and three dimensional arrays.   In some cases, GPU systems provide the DSP and general purpose accelerated capabilities all in one facility. 
 
-% subsection creating_or_importing_a_program (end)
 
-\subsection{Importing Libraries} % (fold)
-\label{sub:importing_libraries}
 
-\footnote{https://os.mbed.com/docs/mbed-studio/current/manage-libraries/index.html#importing-a-library}
 
-% subsection importing_libraries (end)
+
+
+% subsection st_microelectronics_libraries (end)
 
 \subsection{Hardware Abstraction Layer(s)} % (fold)
 \label{sub:hardware_abstraction_layer_s}
 
-\footnote{https://os.mbed.com/questions/53876/CMSIS-vs-STM32CUBEHAL-vs-MBED/}
+ST Microelectroincs and mbedOS supplies Hardware Abstraction Layer(s) to access key MCU capabilites.  The mbedOS is not the only real time operating system (RTOS) for micro-controllers.  ARM's mbedOS does support many implementations of its chip set \footnote{https://os.mbed.com/questions/53876/CMSIS-vs-STM32CUBEHAL-vs-MBED/} and builds into a tidy size for each set it supports.
 
 
 
@@ -94,16 +92,56 @@ Some of the main library sources from STM are provided on the STM32f4 Discovery 
 
 % subsection hardware_abstraction_layer_s (end)
 
-\subsection{ST Microelectronics Libraries} % (fold)
-\label{sub:st_microelectronics_libraries}
+\subsection{It is about the Libraries, Shhsss.} % (fold)
+\label{sub:it_is_about_the_libraries_shhsss}
 
-\footnote{https://www.st.com/content/st\_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32-standard-peripheral-libraries/stsw-stm32065.html}
+For any task associated with a micro-controller, ARM based micro-controllers require the libraries.  ARM micro-controllers require the frameworks of the RTOS itself, in this case mBedOS.  
+
+Developers refactor their code as they get into development.  These libraries serve as building blocks.  This product explores basic library creation to benefit fellow developers and makers of products.
+
+As we create libraries and programs, it behoves us to consider license programs and how to market our productions.  We want the fruits of our labor to bring us profit.  It might if we can attract people to use it and honor our contributions.  It certainly won't if we hoard it or never make it.  
+
+So we explore creating programs, importing existing libraries, and creating new libraries.  Documentation of such products contributes to fellow makers utilizing our work to make things and solving problems.  We make money from establishing those connections and making the software that provide things their connection to real life.
+
+\subsubsection{Create a Repository} % (fold)
+\label{ssub:create_a_repository}
+
+We present software creation from a independent producers point of view.  Many corporations and government entities insist on their own repository tools.  For these entities, we can comprehend the need of such restrictions.  They have assests to protect and the finances to provide on property protection.  
+
+% subsubsection create_a_repository (end)
+
+\subsubsection{Creating A Program} % (fold)
+\label{ssub:creating_a_program}
+The mBed Suite documentation provides an excellent how-to guide on creating a program \footnote{https://os.mbed.com/docs/mbed-studio/current/create-import/index.html}.   This process works out in a very straight forward way.  
 
 
-\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}
+
+% subsubsection creating_a_program (end)
+
+\subsubsection{Importing A Program} % (fold)
+\label{ssub:importing_a_program}
+
+% subsubsection importing_a_program (end)
+
+\subsubsection{Importing Libraries} % (fold)
+\label{ssub:importing_libraries}
 
 
-% subsection st_microelectronics_libraries (end)
+\footnote{https://os.mbed.com/docs/mbed-studio/current/manage-libraries/index.html#importing-a-library}
+
+% subsubsection importing_libraries (end)
+
+\subsubsection{Creating Libraries} % (fold)
+\label{ssub:creating_libraries}
+
+% subsubsection creating_libraries (end)
+
+
+% subsection it_is_about_the_libraries_shhsss (end)
+
+
+% section the_base_line_integrated_development_environment_part_1 (end)
+
 
 
 \section{Basic Hard Tools} % (fold)
@@ -127,7 +165,6 @@ Lastly, the STDIO has trouble with printing floats.
 
 % subsection flushing_the_standard_input_output (end)
 
-% section basic_hard_tools (end)
 
 \subsection{Blinky} % (fold)
 \label{sub:blinky}
@@ -145,7 +182,7 @@ Eight bit Shifter IC 74HC595
 
 % subsection eight_bit_shift_register (end)
 
-% section the_base_line_integrated_development_environment_part_1 (end)
+% section basic_hard_tools (end)
 
 
 \section{Analog to Digital Conversion} % (fold)
