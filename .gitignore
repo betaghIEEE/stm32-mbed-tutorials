@@ -111,3 +111,8 @@ study-STM32/workOnSTM32-With-mBed+Fun-Kit.out
 study-STM32/.workOnSTM32-With-mBed+Fun-Kit.lb
 basicThermeter-textbook-example/mbed-os.lib
 basicThermeter-textbook-example/.gitignore
+/MultiLED/mbed-os.lib
+/multiplexedLEDRefreshing/mbed-os.lib
+/mutexAsPresented/mbed-os.lib
+/semaphoreExampleTextbook/mbed-os.lib
+/signalTextbookExample/mbed-os.lib
