@@ -1,5 +1,6 @@
 reaction-timer/.gitignore
 reaction-timer/mbed-os.lib
+*.lib
 textbook-example-event-counter/BUILD/NUCLEO_F413ZH/ARMC6/.includes_d244edd1a489822fe19c82c2c387634e.txt
 textbook-example-event-counter/BUILD/NUCLEO_F413ZH/ARMC6/.link_options.txt
 textbook-example-event-counter/BUILD/NUCLEO_F413ZH/ARMC6/.link_script.sct
@@ -116,3 +117,4 @@ basicThermeter-textbook-example/.gitignore
 /mutexAsPresented/mbed-os.lib
 /semaphoreExampleTextbook/mbed-os.lib
 /signalTextbookExample/mbed-os.lib
+*.lib
