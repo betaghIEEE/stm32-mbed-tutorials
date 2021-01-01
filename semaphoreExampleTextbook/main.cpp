@@ -5,12 +5,12 @@
 Thread thread1, thread2, thread3, thread4;
 
 Semaphore sema(2);
-Serial pc(USBTX, USBRX);
+//Serial pc(USBTX, USBRX);
 
 void task(const char *text){
     while(1){
         sema.wait();
-        pc.print("%s\n\r", (char *) text);
+        print("%s\n\r", (char *) text);
         wait(2);
         sema.release();
     }

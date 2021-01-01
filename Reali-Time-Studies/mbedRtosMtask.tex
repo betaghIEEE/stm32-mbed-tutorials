@@ -1,0 +1,70 @@
+% !TEX TS-program = xelatex
+%
+% Created by Daniel Beatty on 2020-12-29.
+% Copyright (c) 2020 All Night Star Party.
+\documentclass{article}
+
+\usepackage{polyglossia}
+\usepackage{hyperref}
+
+\hypersetup
+{
+  pdftitle   = {Back To Basics - Multitasking Acorn RISC Machines (ARM) mbedOS},
+  pdfsubject = {Subject},
+  pdfauthor  = {Daniel Beatty}
+}
+
+\title{Back To Basics - Multitasking Acorn RISC Machines (ARM)}
+\author{Daniel Beatty}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This work reviews the changes in the ARM mbedOS.  Versions 5 and 6 introduced API changes that break previous code stacks.  Thus, this work reviews the basics and creates a framework to contend with these changes.
+\end{abstract}
+
+\section{Introduction}
+
+Multitasking operating systems have become a fundamental concept in computer science.  Real-time operating systems take special interest in these matters, as these introduce reliability issues.  
+
+\begin{itemize}
+
+	\item Critical issues include:
+
+	\item The multitasking scheduling algorithm itself
+
+	\item The mbed RTOS libraries
+	\item Mbed RTOS structures
+	\begin{itemize}
+
+		\item Mbed thread,
+
+		\item queues,
+
+		\item signals,
+
+		\item mutexes,
+
+		\item semaphore,
+
+		\item mail,
+
+		\item and RTOS timer
+
+	\end{itemize}
+	
+
+\end{itemize}
+
+
+One thing seems to have changed with mbed-OS version 6.  Now the mbed does not make a distinct RTOS timer.  It was an object in previous generations of the OS.  
+
+\section{Input and Output Libaries} % (fold)
+\label{sec:input_and_output_libaries}
+Most examples of 
+
+% section input_and_output_libaries (end)
+
+\end{document}

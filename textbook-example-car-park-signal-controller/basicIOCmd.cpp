@@ -1,4 +1,4 @@
-#include "basicIOCmd.h"
+#include "basicIOCmd.hpp"
 
 #include "BufferedSerial.h"
 #include "mbed.h"
