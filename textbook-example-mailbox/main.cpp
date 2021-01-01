@@ -1,8 +1,9 @@
 #include "mbed.h"
 #include "rtos.h"
+#include <cstdio>
 
 Thread thread1, thread2;
-Serial pc(USBTX, USBRX);
+//Serial pc(USBTX, USBRX);
 
 typedef struct {
     int no1;
@@ -35,7 +36,8 @@ void consumer()
     if (evt.status == osEventMail )
     {
         mymail *mail = (mymail*) evt.value.p ;
-        pc.print("No1=%d No2=%d\n\r", mail->no1, mail->no2);
+        print("No1=%d No2=%d\n\r", mail->no1, mail->no2);
+		fflush(stdout);
     }
 }
 

@@ -1,9 +1,10 @@
 #include "cmsis_os.h"
 #include "mbed.h"
 #include "rtos.h"
+#include <cstdio>
 
 Thread thread1, thread2;
-Serial pc(USBTX, USBRX);
+//Serial pc(USBTX, USBRX);
 
 typedef struct 
 {
@@ -20,10 +21,10 @@ Queue<msg, 16> queue;
 
 void producer()
 {
-    msg *message = mpool.alloc();
+    msg *message = mpool.try_alloc();
     message->no1 = 10;
     message->no2 = 20;
-    queue.put(message);
+    queue.try_put(message);
 }
 
 // 
@@ -31,11 +32,12 @@ void producer()
 //  
 void consumer() 
 {
-    osEvent evt = queue.get();
+    osEvent evt = queue.get(osWaitForever);
     if(evt.status == osEventMessage)
     {
         msg *message = (msg*) evt.value.p;
-        pc.printf("No1=%d No2=%d\n\r", message->no1, message->no2);
+        printf("No1=%d No2=%d\n\r", message->no1, message->no2);
+		fflush(stdout);
     }
 }
 
