@@ -63,8 +63,61 @@ One thing seems to have changed with mbed-OS version 6.  Now the mbed does not m
 
 \section{Input and Output Libaries} % (fold)
 \label{sec:input_and_output_libaries}
-Most examples of 
+Most examples of threads, queues, signals, and mutexes all entail a message sent to a terminal of some kind.  Older versions of mbed examples utilized the Serial object to provide basic C style output.  It seems that newer versions simply implement C stdio libraries.
+
+We should follw one key thing to do when using the C Standard Input / Output (cstdio) library in mbedOS' interrupt based multi-tasking.  Namely, we should flush the buffer often.  
+
+It is often better to pass data off to a class whose task it is to transfer data to a host machine.  The thread managing such communication then marshalls the structure into a string.  That thread then sends the string through the I/O channel, and collects any new message that may have arrived in the buffer.  
+
+We shall present this option in another episode.
 
 % section input_and_output_libaries (end)
+
+\section{Interrupt Based Threads} % (fold)
+\label{sec:interrupt_based_threads}
+
+\subsection{Basics of Threads in mBedOS 6} % (fold)
+\label{sub:basics_of_threads_in_mbedos_6}
+Almost every multi-tasking operating system includes a form of threads.  IEEE Portable Operating System Interface (POSIX) standards define a form of threads.  The mbedOS RTOS includes several classes pertaining to multitasking.  
+
+The mbedOS RTOS libraries provide two classes to deal with threads: ``Thread'' and ``ThisThread''.  ``ThisThread'' provides messages to thread queue pertaining to the thread presently running.  Where as ``Thread'' provides an external management of specific thread. 
+
+Let us examine a demonstration program.  This code is modified from the material provided by \cite{arm-based-microcontroller-mbed}.  The base line architecture is the same.  
+
+\begin{algorithm}
+	\begin{algorithmic}
+		\STATE Start thread for LED A
+		\STATE Start thread for LED B
+		\STATE Run an infinite loop
+	\end{algorithmic}
+	
+\end{algorithm}
+
+\begin{algorithmic}
+	\WHILE{}
+		\STATE Flash LED
+		\STATE sleep for amount for LED
+	\ENDWHILE
+	
+\end{algorithmic}
+
+ARM changed the sleep methods.  The ``ThisThread'' used to use a wait method.  Now, we call ``sleep_for'' to make the thread rest for units of defined by the standard chrono library.
+
+
+% subsection basics_of_threads_in_mbedos_6 (end)
+
+ \subsection{What is this good for} % (fold)
+ \label{sub:what_is_this_good_for}
+ We utilize threads to handle things that typically run on a timer or some other background way.  We can use threads to monitor digital inputs and outputs that are not interrupt based.  
+ 
+ For example, we can measure analog to digital voltage at a near constant rate.  In this thread, we can store these values in an array of structures.  This structure we setup to accurately measure voltage and time.  If this time is good enough then we can use these values to serve as a poor man's oscilloscope.  
+ 
+ 
+ 
+ % subsection what_is_this_good_for (end)
+
+% section interrupt_based_threads (end)
+
+
 
 \end{document}
