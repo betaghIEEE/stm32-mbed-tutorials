@@ -9,9 +9,10 @@ Semaphore sema(2);
 
 void task(const char *text){
     while(1){
-        sema.wait();
+        //sema.wait();
+        wait_seconds(2);                    // We have to make fix.  Semaphore does not have a wait method any more.
         print("%s\n\r", (char *) text);
-        wait(2);
+        wait_seconds(2);
         sema.release();
     }
 }

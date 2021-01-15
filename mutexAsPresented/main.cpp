@@ -1,16 +1,17 @@
 #include "mbed.h"
 #include "rtos.h"
+#include <cstdio>
 
 
 Thread thread1, thread2;
-Serial pc(USBTX, USBRX);
+//Serial pc(USBTX, USBRX);
 Mutex shr;
 
 void Count(int i)
 {
     shr.lock();
-    pc.printf("Before %d\n\r", i);
-    pc.printf("After %d\n\r",i);
+    printf("Before %d\n\r", i);
+    printf("After %d\n\r",i);
     shr.unlock();
 }
 

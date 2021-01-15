@@ -1,10 +1,11 @@
+#include "PinNames.h"
 #include "mbed.h"
 #include "rtos.h"
 #include <chrono>
 #include <ratio>
 
-DigitalOut LEDA (PC_0);
-DigitalOut LEDB(PC_1);
+DigitalOut LEDA (PC_1);
+DigitalOut LEDB(PC_0);
 Thread thread1, thread2;
 
 void LEDAControl()
