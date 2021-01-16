@@ -1,6 +1,7 @@
 #include "Semaphore.h"
 #include "mbed.h"
 #include "rtos.h"
+#include <cstdio>
 
 Thread thread1, thread2, thread3, thread4;
 
@@ -11,7 +12,7 @@ void task(const char *text){
     while(1){
         //sema.wait();
         wait_seconds(2);                    // We have to make fix.  Semaphore does not have a wait method any more.
-        print("%s\n\r", (char *) text);
+        printf("%s\n\r", (char *) text);
         wait_seconds(2);
         sema.release();
     }
