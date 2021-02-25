@@ -6,6 +6,8 @@
 
 \usepackage{polyglossia}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{algorithm,algorithmic}
 
 \hypersetup
 {
@@ -162,6 +164,9 @@ Lastly, the STDIO has trouble with printing floats.
 
 \subsection{Flushing The Standard Input Output} % (fold)
 \label{sub:flushing_the_standard_input_output}
+Prior to mBedOS 5, the use of the C Standard Input Output library meant opening a USB serial port.  Most of the C Standard Input Output library functions were methods of these singleton classes.  
+
+With mBedOS 6, the C Standard Input Output library uses the main USB serial port by default.  Therefore, serial communication works the way a typical desktop/laptop environment does, with one exception.  Threads and Interrupt Service Routines (especially timers) don't play nice with the buffer.  The process of printing or scanning characters does not have the real time behavior when the either real time events occur.  Thus, the developer does have to keep track to clear the buffer.
 
 % subsection flushing_the_standard_input_output (end)
 
@@ -169,18 +174,256 @@ Lastly, the STDIO has trouble with printing floats.
 \subsection{Blinky} % (fold)
 \label{sub:blinky}
 
+For many in computer programming industries, the first program a developer writes is `hello world.'  The goal of such a program is to demonstrate that when developer runs the program that it does something the user can observe.  
 
-This is a basic hello world type program.  A programmer can build this blinky world program for the on board LED or a circuit example.
+In this example, we develop a program called blinky.  This programs main objective seeks to show some observable work.  In this case, the developer can put together a external circuit or use on board lights of the Nucleo to show the program doing work.  
+
+\begin{algorithmic}
+	\STATE Setup DigtialOut Class for pin $PC\_1$
+	\STATE Setup DigtialOut Class for pin $PC\_0$ 
+	\WHILE {Always \TRUE}
+		\STATE Toggle $PC\_1$
+		\STATE Wait 
+		\STATE Toggle $PC\_0$
+		\STATE Wait
+	\ENDWHILE
+\end{algorithmic}
+
+We can also do basic threads to allow the OS to handle wake up times.  The basic algorithm for the thread control function is similar.  The pin object needs to be relatively global to the name space.  A good exercise is to build a class for blinky with pin and timer value for members.  The actions of this class need to include its initiation with pin number id and default timer values.  More actions entail starting and stopping the thread.  
+
+The ARM team changed the thread library to use the standard chrono space for its time measurements.  For those of us who trained first on C/C++ 99 and earlier, use of this library seems foriegn.  As shown in the listing, an object can be created from this Standard Chrono namespace.  mBed Studio also allows compound interpretation of number and unit as the same namespace object as shown in the main body.
+
+\begin{lstlisting}
+	#include "PinNames.h"
+	#include "mbed.h"
+	#include "rtos.h"
+	#include <chrono>
+	#include <ratio>
+
+	DigitalOut LEDA (PC_1);
+	DigitalOut LEDB(PC_0);
+	Thread thread1, thread2;
+
+	void LEDAControl()
+	{
+	    while(true){
+	        LEDA = !LEDA;
+	        std::chrono::seconds d(1);
+	        ThisThread::sleep_for(d);
+	    }
+	}
+
+
+
+	void LEDBControl()
+	{
+	    while(true){
+	        LEDB = !LEDB;
+	        std::chrono::milliseconds d(500);
+	        ThisThread::sleep_for(d);
+	    }
+	}
+
+	// main() runs in its own thread in the OS
+	int main()
+	{
+	    thread1.start(LEDAControl);
+	    thread2.start(LEDBControl);
+	    while (true) {
+	        ThisThread::sleep_for(10s);
+	    }
+	}
+\end{lstlisting}
 
 % subsection blinky (end)
 
-\subsection{Eight Bit Shift Register} % (fold)
-\label{sub:eight_bit_shift_register}
+\subsection{Seven Segment LED} % (fold)
+\label{sub:seven_segment_led}
+
+% Reference ARM Book Chapter 7  section 16
+The seven segment light emitting diode circuit example yields some interesting issues for a microcontroller.  One, the basic digit requires one digital out pin per segment (in other words seven).   Two, the circuit also requires a common ground.  Three, if the circuit multiple digits involves multiple digits, these devices store logic levels.  This allows another digital pin out set to determine which digit to change.  
+
+This issue is a classic issue dating back to early micro-controllers.  This issue allows most instructors of micro-controller theory to segway a lesson from basic digital design into the curriculum.  Therefore, we see a simple software definition of a seven segment LED structure to determine the digital output pins.
+
+The mBedOS boards allow software to address whole port families.  We can address ports A, B, C, etc. as a whole register.  This makes the development of libraries and classes a much simpler exercise.  
+
+One word of advice, pick your use of ports carefully.  If the controller needs to read in analog to digital, produce pulse width modulation, or digital to analog out then these operations can't share the port devoted to managing the seven segment LED.
+
+The basic digital design portion of this exercise requires one to map the each digit to what pins must be turned on.  This map must then be applied to an 8-bit word that controls the pins.  Note, the designer can do this with individual digital out operations.  It simply requires on the order of 8 sets operations more to do so by individual digital out instructions.  Where as, assigning a single 8-bit word requires fewer instructions.
+
+In this example, we use 5161AS seven segment LED provided in the Rex Qualis Uno R3 Project Starter Kit.  There are other seven segment LED models made, and one must identify the segments to build the circuit properly. 
+
+The pins for the Nucleo-F413ZH can be found online\footnote{https://os.mbed.com/platforms/ST-Nucleo-F413ZH/}.  The pins for a basic bread board with the 5161AS seven segment LED can be found in figure \ref{}.  The port settings to equal the number to be displayed are found in table \ref{}.
+
+\begin{table}[htb!]
+	\caption{Seven Segment Display Port Values}
+	\label{table:label}
+	\centering
+	\begin{tabular}{llllllllll}
+		\toprule
+		\textbf{Number} & \textbf{PC 7} & \textbf{PC 6} & \textbf{PC 5} & \textbf{PC 4} & \textbf{PC 3} & \textbf{PC 2} & \textbf{PC 1} & \textbf{PC 0} & \textbf{Hex Value}\\
+		\midrule
+		             0 &              0 &              0 &              1 &              1 &              1 &              1 &              1 &              1 &              0x3F\\
+		             1 &              0 &              0 &              0 &              0 &              0 &              1 &              1 &              0 &              0x06\\
+		             2 &              0 &              1 &              0 &              1 &              1 &              0 &              1 &              0 &              0x5b\\
+		             3 &              0 &              1 &              0 &              0 &              1 &              1 &              1 &              1 &              0x4F\\
+		             4 &              0 &              1 &              1 &              0 &              1 &              1 &              1 &              0 &              0x66\\
+		             5 &              0 &              1 &              1 &              0 &              1 &              1 &              0 &              1 &              0x6D\\
+		             6 &              0 &              1 &              1 &              1 &              r5c6 &              1 &              0 &              1 &              0x7D\\
+		             7 &              0 &              0 &              0 &              0 &              0 &              1 &              1 &              1 &              0x07\\
+		             8 &              0 &              1 &              1 &              1 &              1 &              1 &              1 &              1 &              0x7f\\
+		             9 &              0 &              1 &              1 &              0 &              1 &              1 &              1 &              1 &              0x6f\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{algorithmic}
+	\STATE Configure Port C Lower Byte as a group
+	\STATE Define segment patterns
+	\STATE Set Count to 0  
+	\WHILE {Always \TRUE}
+		\STATE Send count to display
+		\STATE Wait 1 second
+		\IF {Count is greater or equal to 10} 
+			\STATE set count to 0
+		\ENDIF
+	\ENDWHILE
+\end{algorithmic}
+
+\begin{lstlisting}
+/*
+	This 7-Segment Counter is based on a textbook 
+example from Dogan Ibrahim's ARM-based Microcontroller Projects Using mbed.
+
+	Modifications were made by Dan Beatty to adjust to mBed Studio and mBedOS 6.x.
+*/
 
 
-Eight bit Shifter IC 74HC595 
+#include "mbed.h"
+#include "rtos.h"
 
-% subsection eight_bit_shift_register (end)
+PortOut Segments(PortC, 0xFF);
+int LEDS[] = {0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f};
+
+// main() runs in its own thread in the OS
+int main()
+{
+	int count = 0;
+	
+    while (true) {
+		Segments = LEDS[count];
+		wait_us(1000000);
+		count++;
+		if (count >= 10) count = 0;
+        printf("%d \n", count);
+
+    }
+}
+\end{lstlisting}
+
+
+
+
+% subsection seven_segment_led (end)
+
+
+\subsection{Basic Digital Input} % (fold)
+\label{sub:basic_digital_input}
+
+%  Reference ARM Book Chapter 7 section 13 - 14
+Basic digital input can be demonstrated by an 3 sets of switch input.  The input goes low when the switch is closed and high when the switch is open.  The switches are simple buttons provided in the Rex Qualis Electronic Component Fun Kit.  This kit also has an RGB LED.  The top of the LED is transparent and one can see the etching.  The fat etching is the common ground.  We connect the other three to red, blue, and green control pins.  These pins need a 330/390 ohm resistor to establish sufficient current limits for the Nucleo Board.
+
+\begin{algorithmic}
+	\STATE Configure the RGB output
+	\STATE Configure the R, G, B buttons as inputs and enable them as Pull-ups
+	\STATE Clear all LEDs
+	\WHILE{Forever TRUE}
+		\IF {R is pressed}
+		\STATE Toggle Red color for display
+		\ENDIF
+		\IF {G is pressed}
+		\STATE Toggle Green color for display
+		\ENDIF
+		\IF {B is pressed}
+		\STATE Toggle Blue color for display
+		\ENDIF
+	\ENDWHILE
+\end{algorithmic}
+
+\begin{lstlisting}
+	/*********************************************
+	In this project, an RGB LED is connect. So are 3 buttons. 
+	Pressing a button toggles the corresponding color.
+
+	R button = PC_0
+	G button = PC_1
+	B button = PC_2
+
+	The RGB LED pin are connected as follows:
+	Red = PC_3
+	Green = PC_4
+	Blue = PC_5
+
+	Original Supplied by Dogan Ibrahim, August 2018 in 
+	"ARM-based Microcontroller Projects Using mBed"
+	Modified by Dan Beatty for use in mBed Studio 
+	mBed OS 6.x
+	
+	*********************************************/
+
+
+	#include "mbed.h"
+
+	BusOut RGB(PC_3, PC_4, PC_5);
+	DigitalIn R(PC_0, PullUp);
+	DigitalIn G(PC_1, PullUp);
+	DigitalIn B(PC_2, PullUp);
+
+	// main() runs in its own thread in the OS
+	int main()
+	{
+		RGB = 0;
+	    while (true) {
+			if (R == 0) {
+				if (RGB & 1 == 1)
+					RGB = RGB & 6;
+				else
+					RGB = RGB | 1;
+			}
+			if (G == 0) {
+				if (RGB & 2 == 2)
+					RGB = RGB & 5;
+				else
+					RGB = RGB | 2;
+			}
+			if (B == 0) {
+				if (RGB & 4 == 4)
+					RGB = RGB & 3;
+				else
+					RGB = RGB | 4;
+			}
+	    }
+	}
+\end{lstlisting}
+
+% subsection basic_digital_input (end)
+
+
+
+\subsection{Relays} % (fold)
+\label{sub:relays}
+
+%  Reference ARM Book Chapter 7-17
+
+% subsection relays (end)
+
+
+\subsection{Optical Isolators} % (fold)
+\label{sub:optical_isolators}
+
+%
+
+% subsection optical_isolators (end)
 
 % section basic_hard_tools (end)
 
@@ -188,11 +431,13 @@ Eight bit Shifter IC 74HC595
 \section{Analog to Digital Conversion} % (fold)
 \label{sec:analog_to_digital_conversion}
 
+To test the basic idea of a Analog to Digital Conversion (ADC), we can use the concept of a voltmeter.  Another way is with a thermistor circuit.  Some temperature sensitive devices have a more calibrated response and we have formulae that can translate the voltage to known temperature scales easily.   
+
 \subsection{Simple Analog In - Voltmeter} % (fold)
 \label{sub:simple_analog_in_voltmeter}
 
+This example sets up two versions of the same general circuit.  The first version is the simplest one can make.  Often, this version does not scale to real world problems.  Real world problems can include large power issues that would damage the microcontroller in the process.  The second version compensates for circuits with larger currents by placing a optical isolator in between the test circuit and the microcontroller.  
 
-The terms simple and analog rare work together in practice.  This work shows examples to highlight how the analog to digital converter (ADC) works,  distinction when an optical isolator, and safety mechanisms to protect your micro-controller from damage.
 
 %We can make a simple analog example using the parts in the Fun Kit.   We design the circuit to have very little current.  
 
