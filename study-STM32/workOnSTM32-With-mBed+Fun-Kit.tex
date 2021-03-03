@@ -29,14 +29,15 @@
 
 \section{Introduction}
 
+The work developed in this document focuses on the needs of one of my clients.  He needed a micro-controller to manage a device to drive large power loads.  This document therefore focuses on one of the most primal features of the internet of things.  This work falls in a series that I call `Back to the Basics.'
 
-Why am I doing this?  I have some examples provided by a client of mine.  These might have worked in some STM32 development environments.  However, software evolves to meet hardware and security needs.  I suspect that I am not alone.  
+%Why am I doing this?  I have some examples provided by a client of mine.  These might have worked in some STM32 development environments.  However, software evolves to meet hardware and security needs.  I suspect that I am not alone.  
+So, what do I want out of a back to the basics book?  
+I would prefer to have a cross platform means to develop software. I would prefer the ability to analyze the stacks deployed on these devices from the kernel up.  I would like to ensure that I can deliver a good product, and apply micro and macro architectures (aka design patterns) as well good algorithms.  
 
-I would prefer to have a cross platform means to develop software. I would prefer the ability to analyze the kernels deployed on these devices.  I would like to ensure that I can deliver a good product, and apply micro and macro architectures (aka design patterns) as well good algorithms.  
+To do this, this work focuses on the mBed system of development.  This document shows this project utilizing the STM32 product line.  In some cases, I also utilize the Arduino products just to demonstrate a cross manufacture approach to testing designs.  Lastly, this document shows how to do this work on the MacOS, Windows, and Linux (ARM) platform.  
+%So, I want to know how this mBed system work.  I will start with the STM32 product line to develop this micro-architecture approach.  
 
-So, I want to know how this mBed system work.  I will start with the STM32 product line to develop this micro-architecture approach.  
-
-I plan to demostrate these techiniques on MacOS, Windows, and Linux (ARM).
 
 \newpage
 \section{The Base Line Integrated Development Environment Part 1} % (fold)
