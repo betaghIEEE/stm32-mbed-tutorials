@@ -29,42 +29,37 @@
 
 \section{Introduction}
 
-The work developed in this document focuses on the needs of one of my clients.  He needed a micro-controller to manage a device to drive large power loads.  This document therefore focuses on one of the most primal features of the internet of things.  This work falls in a series that I call `Back to the Basics.'
+The work developed here focuses on the needs of my clients.  The job needed a micro-controller to manage a device to drive large power loads.  Therefore, this document focuses on primal microcontroller features.  These features form the backbone of the internet of things. This work falls in a series that I call ‘Back to the Basics.’ 
 
-%Why am I doing this?  I have some examples provided by a client of mine.  These might have worked in some STM32 development environments.  However, software evolves to meet hardware and security needs.  I suspect that I am not alone.  
-So, what do I want out of a back to the basics book?  
-I would prefer to have a cross platform means to develop software. I would prefer the ability to analyze the stacks deployed on these devices from the kernel up.  I would like to ensure that I can deliver a good product, and apply micro and macro architectures (aka design patterns) as well good algorithms.  
+So, what do I want out of a back to the basics book? I prefer to develop a cross platform the first time. I require understanding of the code stacks deployed on these devices from the kernel up.  I want to deliver a good product.
 
-To do this, this work focuses on the mBed system of development.  This document shows this project utilizing the STM32 product line.  In some cases, I also utilize the Arduino products just to demonstrate a cross manufacture approach to testing designs.  Lastly, this document shows how to do this work on the MacOS, Windows, and Linux (ARM) platform.  
-%So, I want to know how this mBed system work.  I will start with the STM32 product line to develop this micro-architecture approach.  
+So what makes for a good product?  The architectures selected tell an engineer the product's goodness score.  Object oriented design stands on the pillars of design patterns.  A computer engineer applies algorithms, design patterns, and analysis engines.  These things give the engineer confidence.
+
+To do this, this work focuses on the mBed system of development. This document shows this project utilizing the STM32 product line. In some cases, I also utilize the Arduino products just to demonstrate a cross manufacture approach to testing designs. Lastly, this document shows how to do this work on the MacOS, Windows, and Linux (ARM) platform. 
 
 
 \newpage
 \section{The Base Line Integrated Development Environment Part 1} % (fold)
 \label{sec:the_base_line_integrated_development_environment_part_1}
+The Eclipse Foundation and Advanced RISC Machines Limited (ARM) together produced mBed Studio.  The mBed Studio provides an Integrated Development Environment (IDE)\footnote{https://os.mbed.com} .  ARM designed their IDE for micro-controller developers to simplify complex projects. 
 
-The Eclipse Foundation and Advanced RISC Machines(ARM) consortium work together to produce an Integrated Development Environment(IDE)\footnote{https://os.mbed.com} to fulfill needs of micro-controller developers.  The development community needs build services and IDE systems to handle the complex builds. %that include the real-time operating system (RTOS) itself and supplimental main purpose software.  %This capability follows in the footsteps of many micro-controllers that came before, and enables a new generation of makers.
+ARM included a hardware abstract layer (HAL) to connect common features from many producers. Thus, I can develop a simple program, compile it for each board, and that program will run. ARM connects these HALs together by communication methods.
 
-The Advanced RISC Machines (ARM) Limited developed the mBedOS to exhibit standard features amongst various manufactures builds.  Thus, I can develop a simple program and compile it for many different boards, and it still works. 
-
-Mbed Studios (a modified Eclipse Theia) released in June 2019.  It is derived from the Eclipse `Theia' line shown in a YouTube video\footnote{https://www.youtube.com/watch?v=HsTtzqL-GP8}.
-
-ARM made the mBed Suite \footnote{https://os.mbed.com/studio/} based on Eclipse Theia  \footnote{https://youtu.be/NLkQzx6rrnU \\https://www.youtube.com/channel/UCXu7pV552EkR99mCzjwGvTQ/featured}.  This IDE supports inclusion of the mBed OS itself in a build and any additional libraries required to construct a software product for the ARM based boards.  These libraries include:
-\begin{itemize}
-	\item `Tiny interactions'
-	\item Communication mechanisms
-	\item Hardware Abstraction Layer(s)
-\end{itemize}
+Mbed Studios (a modified Eclipse Theia) released in June 2019. It is derived from the Eclipse ‘Theia’ line shown in a YouTube video\footnote{https://www.youtube.com/watch?v=HsTtzqL-GP8}. 
 
 
 
-ARM supplies a tutorial on installing the mBed Theia environment on MS Windows 10\footnote{https://os.mbed.com/teams/ST-Americas-mbed-Team/wiki/Getting-Started-with-mbed-and-the-STM32F}.  We will examine Mac and Windows on Intel processor machines.   For example, I develop embedded software on a MacBook Pro and also demonstrate with a Mac Min running MS Windows with bootcamp.  This work also seeks to produce Raspberry Pi and iPad tools to augment the STM Micro-controllers.  %\textbf{I} will also attempt to set up the mBed Studio on a Raspberry Pi.   What would be useful is to establish a Jenkins + Version control + Testing + Distribution suite for these applications.  
+ARM supplies a tutorial on installing the mBed Theia environment on MS Windows 10\footnote{https://os.mbed.com/teams/ST-Americas-mbed-Team/wiki/Getting-Started-with-mbed-and-the-STM32F}.  
+
+This background topic shall show examine basic mBed tasks on Intel based processor machines running MacOS and Windows.  This work also demonstrates the same tasks on Raspberry Pi.  A later chapter shows a related topic, MCU talks with iPad. 
 
 
 \subsection{ST Microelectronics Libraries} % (fold)
 \label{sub:st_microelectronics_libraries}
 
-ST Microelectronics started as a French company.  It operates out of many nations.  In addition to producing the micro-controller boards themselves, they also produce support libaries for their boards\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}.  For example, ST Microelectronics is not the first manufacturer to produce ARM based digital signal processor (DSP)\footnote{https://www.st.com/content/st\_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32-standard-peripheral-libraries/stsw-stm32065.html}.  DSP engines provide a similar acceleration to vector / array math operations that a graphics processor units (GPU) provides to two and three dimensional arrays.   In some cases, GPU systems provide the DSP and general purpose accelerated capabilities all in one facility. 
+ST Microelectronics (STM) started as a French company. Now, STM operates out of many countries. In addition to the boards themselves, they also produce support libraries for their boards\footnote{http://www.emcu.it/STM32F4xx/STM32F4-Library/STM32F4-Library.html}. 
+
+For example, STM and Texas Instruments (TI) produce ARM based boards with digital signal processor (DSP)\footnote{https://www.st.com/content/st\_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32-standard-peripheral-libraries/stsw-stm32065.html} support.  A DSP provides acceleration to vector math.  These architectures enhance a MCU's ability to quickly match patterns and make adjustments.
 
 
 
@@ -76,12 +71,10 @@ ST Microelectronics started as a French company.  It operates out of many nation
 \subsection{Hardware Abstraction Layer(s)} % (fold)
 \label{sub:hardware_abstraction_layer_s}
 
-ST Microelectroincs and mbedOS supplies Hardware Abstraction Layer(s) to access key MCU capabilites.  The mbedOS is not the only real time operating system (RTOS) for micro-controllers.  ARM's mbedOS does support many implementations of its chip set \footnote{https://os.mbed.com/questions/53876/CMSIS-vs-STM32CUBEHAL-vs-MBED/} and builds into a tidy size for each set it supports.
+STM, TI, and Arduino all benefit from mBedOS' Hardware Abstraction Layer(s)(HAL) to access key MCU capabilites.  The mbedOS is not the only real time operating system (RTOS) for micro-controllers.  ARM's mbedOS does support many implementations of its chip set \footnote{https://os.mbed.com/questions/53876/CMSIS-vs-STM32CUBEHAL-vs-MBED/} design.  The mBed compilers build both the mBedOS and specific project code into a tidy size.  This good support makes ARM chipsets a safe bet for many manufacturers.
 
 
-
-
-The mBed website carries white paper references for each of the boards it supports.  For example, this piece focuses on the Nucleo-F413ZH\footnote{https://os.mbed.com/platforms/ST-Nucleo-F413ZH/}.  This platform and others can be found at \footnote{https://os.mbed.com/platforms/}.
+The mBed website carries white paper references for each of the boards it supports.  For example, this document utilizes the Nucleo-F413ZH\footnote{https://os.mbed.com/platforms/ST-Nucleo-F413ZH/} as an example.  This platform and others can be found at \footnote{https://os.mbed.com/platforms/}.
 Alternative cards include:
 \begin{itemize}
 	\item Discovery F413H \footnote{https://os.mbed.com/platforms/ST-Discovery-F413H/}
@@ -98,13 +91,13 @@ Some of the main library sources from STM are provided on the STM32f4 Discovery 
 \subsection{It is about the Libraries, Shhsss.} % (fold)
 \label{sub:it_is_about_the_libraries_shhsss}
 
-For any task associated with a micro-controller, ARM based micro-controllers require the libraries.  ARM micro-controllers require the frameworks of the RTOS itself, in this case mBedOS.  
+For any task associated with a MCU, ARM based micro-controllers require the libraries. ARM MCUs require the frameworks of the RTOS itself, in this case mBedOS. 
 
-Developers refactor their code as they get into development.  These libraries serve as building blocks.  This product explores basic library creation to benefit fellow developers and makers of products.
+Developers refactor their code as they get into development. These libraries serve as building blocks. This product explores basic library creation to benefit fellow developers and makers of products. 
 
-As we create libraries and programs, it behoves us to consider license programs and how to market our productions.  We want the fruits of our labor to bring us profit.  It might if we can attract people to use it and honor our contributions.  It certainly won't if we hoard it or never make it.  
+As we create libraries and programs, it behoves us to consider license programs and how to market our productions. We want the fruits of our labor to bring us profit. If we never make and sell things then we certainly shall not build profit.  If we horde what we make then we won't make profit, either.
 
-So we explore creating programs, importing existing libraries, and creating new libraries.  Documentation of such products contributes to fellow makers utilizing our work to make things and solving problems.  We make money from establishing those connections and making the software that provide things their connection to real life.
+So we explore creating programs, importing existing libraries, and creating new libraries. Documentation of such products contributes to our fellow makers.  We make money from establishing those connections and making the software that connect to real life. 
 
 \subsubsection{Create a Repository} % (fold)
 \label{ssub:create_a_repository}
@@ -125,6 +118,15 @@ The mBed Suite documentation provides an excellent how-to guide on creating a pr
 \label{ssub:importing_a_program}
 
 % subsubsection importing_a_program (end)
+
+\subsubsection{The simple C++ class} % (fold)
+\label{ssub:the_simple_c_class}
+
+The ANSI, NIST and ISO committees; who have taken an interest in C++ language; developed several iterations to capture the basic notion of a class.  For many students of computer science, the C++ language is the first language learned.  ANSI/ISO has governed the standard by which each generation of student has learned the notion of a class.
+
+The basic notion of a class provides an encapsulation of member properties and action methods.   Basic automata theory captures some of the basics of object oriented programming as input, states, and outputs.  
+
+% subsubsection the_simple_c_class (end)
 
 \subsubsection{Importing Libraries} % (fold)
 \label{ssub:importing_libraries}
