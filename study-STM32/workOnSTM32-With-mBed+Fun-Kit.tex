@@ -104,7 +104,24 @@ So we explore creating programs, importing existing libraries, and creating new 
 
 We present software creation from a independent producers point of view.  Many corporations and government entities insist on their own repository tools.  For these entities, we can comprehend the need of such restrictions.  They have assests to protect and the finances to provide on property protection.  
 
+On the other hand, your work is often times things that you want the priviledge to reuse.  Reuse is one of the tenets of object-oriented programming.  When we restrict one of these tenets, we risk detriment to our profession.  
+
+So, we go through a typical arrangement with to produce a repository for use in embedded development.  Providers can vary such as BeanStalk and GitHub.  Resources such as GitHub come in handy as mBed has much of their resources available through this resource.  However, ARM can just as easily backup their repositories via other outlets, including the hosting of their own. 
+
+
+
 % subsubsection create_a_repository (end)
+
+\subsubsection{Workspaces} % (fold)
+\label{ssub:workspaces}
+
+The notion of a workspace simply gives provides some directory on the development computer.  A workspace is merely a directory in the user's home directory.  You can select any directory to act as a workspace.  
+
+This space allows developers to produce code and keep it organized.   By default, the installation of Mbed Studios produces the installation user's first workspace in their workspace.  For example, you might store a common MbedOS source for programs you build in the workspace.  Likewise, you can use the workspace to connect a library or several libraries used by programs written in the workspace.
+
+
+
+% subsubsection workspaces (end)
 
 \subsubsection{Creating A Program} % (fold)
 \label{ssub:creating_a_program}
@@ -117,29 +134,179 @@ The mBed Suite documentation provides an excellent how-to guide on creating a pr
 \subsubsection{Importing A Program} % (fold)
 \label{ssub:importing_a_program}
 
+This process is a simple file system operation combined with applications for your favorite version control system.  In this example, this work presents GitHub.  For the reader's purposes, any version control system can work.  Teaching these version control systems is outside the scope of this work.
+
+
 % subsubsection importing_a_program (end)
+
+
+\subsubsection{Importing Libraries} % (fold)
+\label{ssub:importing_libraries}
+ARM made importing a program rather simple by utilizing the Eclipse Theia platform.  The most common set of libraries import is the mBedOS itself.  This framework contains both the real-time operating system (RTOS) mBedOS and its fundamental C/C++ libraries.  It also contains libraries for other languages such as Python.
+
+Demo:
+
+\footnote{https://os.mbed.com/docs/mbed-studio/current/manage-libraries/index.html#importing-a-library}
+
+% subsubsection importing_libraries (end)
+
+\subsection{Your Workspace} % (fold)
+\label{sub:your_workspace}
+
+Borland made workspace directories a thing back in the 1980s and the Eclipse Foundation formulated much of its products operation around this concept.  Mbed Studio inherits this from its Eclipse Theia roots.
+
+A workspace is simply a directory that an IDE utilizes to manage its projects.  In the last 20 years, many have wrapped their version control working directory into thier workspace.  Mbed detects the artifacts from these version control systems (VCS) to determine which VCS the developer uses. Therefore, Mbed provides tools to interface with the VCS and facilitate management thereof.  
+
+Some developers adopt tendencies from their agile web application to utilize a dedicated build system.  These dedicated build systems work with version control systems to establish the notion of work code.  These systems track code to determine when it is in a working state and when it is not.  Many tools exist to determine what working state comprises.  Does the code compile?  Does the code pass unit tests?  For code trees off the main branch, what new features does this seperate branch examine and or present?
+
+For some embedded systems, it makes sense to include a dedicated build system with the product or interface thereof.  It provides users and technicians a mechanism to determine versions software that work together.  Therefore, the techician can choose configurations that meet customer needs.
+
+All of these capabilities stem from the basic notion of a workspace.  The workspace is the developers first tool of managing the software they develop on any level.  Build your workspace with care.
+
+From the workspace, you can create programs from templates.  The first examples presented in this text only utilize blank and blinky template programs.  Most of the others require the utilization of network establishing components.  Some boards and devices build these features in and others don't.  The more interconnected your product is entails the need for further cyber security to protect it from abuse.
+
+% subsection your_workspace (end)
 
 \subsubsection{The simple C++ class} % (fold)
 \label{ssub:the_simple_c_class}
 
 The ANSI, NIST and ISO committees; who have taken an interest in C++ language; developed several iterations to capture the basic notion of a class.  For many students of computer science, the C++ language is the first language learned.  ANSI/ISO has governed the standard by which each generation of student has learned the notion of a class.
 
-The basic notion of a class provides an encapsulation of member properties and action methods.   Basic automata theory captures some of the basics of object oriented programming as input, states, and outputs.  
+The basic notion of a class provides an encapsulation of abstract data types.   Basic automata theory captures some of the basics of object oriented programming as input, states, and outputs. 
+
+So, we create a simple class to spell out Hello World. %Let us first start from the most basic program known, ``Hello World.''  This program is realitively simple. 
+
+
+\begin{lstlisting}
+	#include "mbed.h"
+	#include <iostream>
+	#include <cstdio>
+	#include <string>
+
+	// main() runs in its own thread in the OS
+	int main()
+	{
+	    std::string shortCircuit = "Don't disassemble ";
+    
+	    std::cout << "Try 1 " << std::endl;
+	    std::cout << shortCircuit << " = number " << std::to_string(5) << "." << std::endl;
+
+		return 0;
+	}
+\end{lstlisting}
+
+%  Reference to STM32's demo on Azure integration. https://event.on24.com/eventRegistration/EventLobbyServlet?target=reg20.jsp&referrer=&eventid=3033694&sessionid=1&key=56AB6F9781B7212E159AAF4866D4778C&regTag=&V2=false&sourcepage=register
+
+In C++, there exists two notions of a string.  Most 1980's and 1990's students of computer science remember the character array.  In the 2000's the notion of a vector to dynamically adjust for growing data entered in the standard's body of attention.  So, a string class entered the standard template library (STL) that exhibited traits similar to those found in Java and Objective-C.  This approach does bear fruit for features useful in control devices.
+
+A simple method of devising a C++ class includes the simplest program taught, namely ``Hello World.''  Some also pluck silly little phrases from 1980's movies like `Short Circuit'.  To illustrate a little mastery of data types, we add to the class some simple integer and floating point members.  
+
+A few things to remember in developing a C++ class.  One, we use the macro system to determine when to define a class.  The define needs to differ in some way from the name of the class or struct (say an all caps form of the name, where as the name itself just starts with a capital letter).  Lastly, contain either a primitive from of marshalling or overload the input and output stream operators.
+
+\begin{lstlisting}
+	
+#include <iostream>
+#include <cstdio>
+#include <string>
+
+#ifndef HELLO_WORLD
+#define HELLO_WORLD
+
+class HelloWorld
+{
+    std::string message;
+    int units;
+	float cost;
+    public:
+        HelloWorld();
+        HelloWorld(int units = 0);
+        HelloWorld(int units, std::string &message );
+        HelloWorld(int units, std::string &message, float cost );
+        std::string getMessage();
+        int getUnits ();
+		std::string marshal();
+
+} ;
+
+#endif 
+	#endif
+\end{lstlisting}
+
+% References:
+%  https://os.mbed.com/forum/mbed/topic/539/?page=1#comment-2683
+% 	https://forum.arduino.cc/index.php?topic=420068.0
+%	https://stackoverflow.com/questions/15128559/how-to-properly-use-a-header-file-to-be-a-complete-class
+%	https://os.mbed.com/questions/567/cout-Where-do-the-characters-go/
+%	https://forums.mbed.com/t/using-iostream-in-an-mbed-project/11108/4
+%	https://forums.mbed.com/t/access-to-fil-using-fatfilesystem/12631
+% https://forums.mbed.com/t/how-to-port-software-serial-to-os5-6/12641
+%	http://www.cplusplus.com/reference/string/to_string/
+% https://learning.oreilly.com/library/view/c-primer-fifth/9780133053043/index.html
+%	https://learning.oreilly.com/library/view/c-primer-fifth/9780133053043/ch06lev2sec16.html#ch06lev2sec16
+%	https://learning.oreilly.com/library/view/c-primer-fifth/9780133053043/ch03lev2sec5.html#ch03lev2sec5
+%	https://learning.oreilly.com/library/view/c-primer-fifth/9780133053043/ch06lev2sec21.html
+
+ 
+%Now, let us make give this program a class.  The premise is that we have some object that combines basic features together to form a cohesive sentence.  Let us take that cliche from the beloved 80's classic, ``Short Circuit.''  The cliche is ``Please don't disassemble number 5.''  This cliche has both a sentence and number in the statement.  Therefore, we want the class to assemble this sentence into something we can print.
+
+\begin{lstlisting}
+	std::string HelloWorld::marshal()
+	{
+		//std::string workingString = this->message;
+		//workingString += " = " + std::to_string(this->units);
+	    return (this->message + " = " + std::to_string(this->units) + " I cost " + to_string(cost) +".") ;
+	}
+\end{lstlisting}
+
+Thus, we develop the notion of concatination of strings.  The STL string object has a to\_string function that exists to make strings out of primatives.   In later chapters, we shall utilize the string object to parse simple language statements into objects and vise versa.  This method ``marshal'' simply shepards the text and simple data types as one simple sentence.  
+
+Then we simply have a new version of the program that sends the string to the C-output stream.  
+\begin{lstlisting}
+	#include "mbed.h"
+	#include <iostream>
+	#include <cstdio>
+	#include <string>
+	#include "helloWorldStruct.hpp"
+
+	// main() runs in its own thread in the OS
+	int main()
+	{
+	    HelloWorld alpha(5);
+	    std::string shortCircuit = "Don't disassemble ";
+	    HelloWorld beta(5, shortCircuit);
+
+	    std::cout << "Try 1 " << std::endl;
+	    std::cout << alpha.marshal() << std::endl;
+
+	    std::cout << "Try 2 " << std::endl;
+	    std::cout << beta.marshal() << std::endl; 
+		
+
+	    std::cout << "Try 3 " << std::endl;
+	    std::cout << beta.getMessage() << " ." << beta.getUnits() << std::endl;
+			//}
+		return 0;
+	}
+\end{lstlisting}
+Here we use the first constructor for an object called alpha.  We construct this object with merely the unit number.  We construct the second object (beta) with a message.   We then print these messages.  Note, the direct notion of just grab the members fails to print the units.  This is a stream issue in mbedOS.  
+
+
 
 % subsubsection the_simple_c_class (end)
 
-\subsubsection{Importing Libraries} % (fold)
-\label{ssub:importing_libraries}
-
-
-\footnote{https://os.mbed.com/docs/mbed-studio/current/manage-libraries/index.html#importing-a-library}
-
-% subsubsection importing_libraries (end)
 
 \subsubsection{Creating Libraries} % (fold)
 \label{ssub:creating_libraries}
 
 % subsubsection creating_libraries (end)
+
+So why did we just tell you about the C++ class.  Simply put, any library we build should utilize namespaces appropriately.  It should allow customers to use these libraries for their products, too.  Yes, fellow developers may exist as a customer.  This goes to the Object-Oriented Program mantra about sharing classes/objects.  
+
+This work demonstrates the creating a library first with the Hello World library example.  Eventually, we introduce a real world example such as a Oscilloscope class.  
+
+
+% Reference: https://os.mbed.com/cookbook/Writing-a-Library
+
 
 
 % subsection it_is_about_the_libraries_shhsss (end)
