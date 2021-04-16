@@ -165,6 +165,8 @@ All of these capabilities stem from the basic notion of a workspace.  The worksp
 
 From the workspace, you can create programs from templates.  The first examples presented in this text only utilize blank and blinky template programs.  Most of the others require the utilization of network establishing components.  Some boards and devices build these features in and others don't.  The more interconnected your product is entails the need for further cyber security to protect it from abuse.
 
+In another chapter, this text shall introduce the notion of a team / distributed build system approach.  What makes such system different is the level of detail required to ensure that a produce developed by one developer integrates with the products of others.  Lastly, such systems should also enable distributed products to upgrade their software with confidence. 
+
 % subsection your_workspace (end)
 
 \subsubsection{The simple C++ class} % (fold)
@@ -201,7 +203,7 @@ In C++, there exists two notions of a string.  Most 1980's and 1990's students o
 
 A simple method of devising a C++ class includes the simplest program taught, namely ``Hello World.''  Some also pluck silly little phrases from 1980's movies like `Short Circuit'.  To illustrate a little mastery of data types, we add to the class some simple integer and floating point members.  
 
-A few things to remember in developing a C++ class.  One, we use the macro system to determine when to define a class.  The define needs to differ in some way from the name of the class or struct (say an all caps form of the name, where as the name itself just starts with a capital letter).  Lastly, contain either a primitive from of marshalling or overload the input and output stream operators.
+A few things to remember in developing a C++ class.  One, we use the macro system.  Compilers complain if it finds the same class defined twice.  The include system needs the macros to ensure that a class is defined only once.  The define needs to differ in some way from the name of the class or struct (say an all caps form of the name, where as the name itself just starts with a capital letter).  Lastly, this example demonstrates a class with a primitive form of marshalling.
 
 \begin{lstlisting}
 	
@@ -307,6 +309,8 @@ This work demonstrates the creating a library first with the Hello World library
 
 % Reference: https://os.mbed.com/cookbook/Writing-a-Library
 
+
+% Note, I am running into a snag on the creating a library.  This is something that we need to resolve for the O'Scope class and basic switching.
 
 
 % subsection it_is_about_the_libraries_shhsss (end)
