@@ -27,15 +27,33 @@
     Abstract
 \end{abstract}
 
+\section{Social Media Overhead} % (fold)
+\label{sec:social_media_overhead}
+
+For all of the videos produced for this series, would you utilize the like, subscribe, and notification features of this streaming platform.  YouTube like any social media utilizes these pieces of data to drive the statistical algorithms of their advertising machine.  
+
+This channel also plans to initiate a patron page for this content.  
+
+Any and all support from you, my faithful audience, contributes greatfully to my success.  For that and your participation, I am truly appreciative.  Thank you.
+
+% section social_media_overhead (end)
+
+\newpage
 \section{Introduction}
+Welcome to this course on developing embedded software on Advanced RISC Machine (ARM) Limited family of platforms.  This course is part of a series `'`Back to the Basics - an Electrical and Computer Engineer's perspective on software development.''  This series also examines hardware development.  
 
-The work developed here focuses on the needs of my clients.  The job needed a micro-controller to manage a device to drive large power loads.  Therefore, this document focuses on primal microcontroller features.  These features form the backbone of the internet of things. This work falls in a series that I call ‘Back to the Basics.’ 
+As I journey to pick up my professional engineering license in California, I am humbly reminded that there is no such thing as a PE for Software Engineering in California.   The grandfather class that protected me in Texas doesn't exist here in California.  Therefore, all I have is the grandfather clause from Texas and our professional societies.  The Institute for Electrical and Electronic Engineers (IEEE) and Association for Computing Machines (ACM) have done much to support us as professionals in all aspects Computer Science and the engineering disciplines that follow.
 
-So, what do I want out of a back to the basics book? I prefer to develop a cross platform the first time. I require understanding of the code stacks deployed on these devices from the kernel up.  I want to deliver a good product.
+The work developed for this course focuses on the needs of my clients.  This job needed a micro-controller to manage a device to drive large power loads.  Therefore, this document focuses on microcontroller features.  These features form the backbone of the internet of things. 
 
-So what makes for a good product?  The architectures selected tell an engineer the product's goodness score.  Object oriented design stands on the pillars of design patterns.  A computer engineer applies algorithms, design patterns, and analysis engines.  These things give the engineer confidence.
+This course documents a journey.  The work I have done to refresh my understanding of embedded systems takes a cross platform approach.  I have picked interchangable general purpose platforms (GPP) used to develop software.  Whether I utilize Apple's, Microsoft, or Linux as my GPP and tool vendors is a matter of personal preference to fit my needs.  Customers, students, and collegues may have different preferences and needs and that is alright.
 
-To do this, this work focuses on the mBed system of development. This document shows this project utilizing the STM32 product line. In some cases, I also utilize the Arduino products just to demonstrate a cross manufacture approach to testing designs. Lastly, this document shows how to do this work on the MacOS, Windows, and Linux (ARM) platform. 
+Bottom line, I want to deliver a good products to my clients.  The more effective and efficient I am helps out substantially.   Even I have to refresh my knowledge base.
+
+So what makes for a good product?  The architectures selected tell an engineer about the product's goodness score.  Object oriented design stands on the pillars of design patterns.  A computer engineer applies algorithms, design patterns, and analysis engines.  These things give the engineer confidence.
+
+To do this, this work focuses on the mBed system of development. This document shows this project utilizing the STM32 product line. In some cases, I also utilize the Arduino products just to demonstrate a cross manufacture approach to testing designs. Lastly, this document shows how to do this work on the MacOS, Windows, and Linux (ARM) platform.  Each of the product used in this course shall be provided in the lesson description.
+
 
 
 \newpage
@@ -49,9 +67,9 @@ Mbed Studios (a modified Eclipse Theia) released in June 2019. It is derived fro
 
 
 
-ARM supplies a tutorial on installing the mBed Theia environment on MS Windows 10\footnote{https://os.mbed.com/teams/ST-Americas-mbed-Team/wiki/Getting-Started-with-mbed-and-the-STM32F}.  
+ARM supplies a tutorial on installing the mBed Theia environment on MS Windows 10\footnote{https://os.mbed.com/teams/ST-Americas-mbed-Team/wiki/Getting-Started-with-mbed-and-the-STM32F}.  I am doing the same on the MacOS platform.  %In some cases, I also demonstrate utilizing a Linux platform running a Raspberry Pi 4 to demonstrate an enterprise build and deploy platform.  
 
-This background topic shall show examine basic mBed tasks on Intel based processor machines running MacOS and Windows.  This work also demonstrates the same tasks on Raspberry Pi.  A later chapter shows a related topic, MCU talks with iPad. 
+This background topic shall show examine basic mBed tasks on Intel based processor machines running MacOS and Windows.  This work also demonstrates the same tasks on Raspberry Pi.  %A later chapter shows a related topic, how a MCU talks with iPad. 
 
 
 \subsection{ST Microelectronics Libraries} % (fold)
@@ -67,7 +85,7 @@ For example, STM and Texas Instruments (TI) produce ARM based boards with digita
 
 
 % subsection st_microelectronics_libraries (end)
-
+\newpage
 \subsection{Hardware Abstraction Layer(s)} % (fold)
 \label{sub:hardware_abstraction_layer_s}
 
@@ -88,40 +106,30 @@ Some of the main library sources from STM are provided on the STM32f4 Discovery 
 
 % subsection hardware_abstraction_layer_s (end)
 
-\subsection{It is about the Libraries, Shhsss.} % (fold)
-\label{sub:it_is_about_the_libraries_shhsss}
 
-For any task associated with a MCU, ARM based micro-controllers require the libraries. ARM MCUs require the frameworks of the RTOS itself, in this case mBedOS. 
+\newpage
+\subsection{Your Workspace} % (fold)
+\label{sub:your_workspace}
 
-Developers refactor their code as they get into development. These libraries serve as building blocks. This product explores basic library creation to benefit fellow developers and makers of products. 
+Stephen C. Johnson of AT\&T's Bell Labs developed a portable compiler and released it in 1979.  The initial committee was spearheaded by Alan Snyder in 1973\footnote{https://dl.acm.org/doi/10.1145/512760.512771}.  Borland made strides to port a Pascal compiler in 1983 and later a C/C++ compiler.  The notion of a workspace emerged as common practice both on PC and on Unix platforms by about 1991. %Class notes.  
 
-As we create libraries and programs, it behoves us to consider license programs and how to market our productions. We want the fruits of our labor to bring us profit. If we never make and sell things then we certainly shall not build profit.  If we horde what we make then we won't make profit, either.
+Eclipse quickly became the IDE of choice for Java by 2003.  Contributors to the Eclipse platform, notably IBM, provided multiple platform support.   The Foundation provided simple recipes that software developers could to get up and producing for free.  In 2003, new Service Oriented Computing Environment (SORCER)  laboratory sold the Information Technology (IT) Committee on the need.  The IT team quickly deployed Eclipse in the labs.  Eclipse then ran Mac, Windows, Linux, and Solaris laboratories.  
 
-So we explore creating programs, importing existing libraries, and creating new libraries. Documentation of such products contributes to our fellow makers.  We make money from establishing those connections and making the software that connect to real life. 
+A workspace is simply a directory that an IDE utilizes to manage its projects.  Companies and universities deployed the Concurrent Version System (CVS) with their Unix systems as early as 1986.  
 
-\subsubsection{Create a Repository} % (fold)
-\label{ssub:create_a_repository}
+CollabNet created Subversion (SVN) in 2000 with Unix and Windows.  CollabNet supplied SVN as an open source  Version Control Systems (VCS) starting in 2009.
 
-We present software creation from a independent producers point of view.  Many corporations and government entities insist on their own repository tools.  For these entities, we can comprehend the need of such restrictions.  They have assests to protect and the finances to provide on property protection.  
+Mbed Studio inherits these integrated features from its Eclipse Theia roots.
+Mbed Studio detects the artifacts from these VCS to determine which the developer uses. Therefore, Mbed Studio provides tools to interface with the VCS and facilitate management thereof.  The Agile development approach found in web application shops utilizes VCS, dedicated build systems, and code search browsers to enable team development.  These systems track code to include the working state builds.  Does the code compile?  Does the code pass unit tests?  For code trees separated from the main branch, what new features does it have?   These issue allow the team to determine when to integrate new features in their product.
 
-On the other hand, your work is often times things that you want the priviledge to reuse.  Reuse is one of the tenets of object-oriented programming.  When we restrict one of these tenets, we risk detriment to our profession.  
+For the internet of things, developers can integrate these capabilities with system on a chip (SOC) systems.  These systems help to manage embedded systems updates.  This capability provides users and technicians a mechanism to manage their collection of systems. 
 
-So, we go through a typical arrangement with to produce a repository for use in embedded development.  Providers can vary such as BeanStalk and GitHub.  Resources such as GitHub come in handy as mBed has much of their resources available through this resource.  However, ARM can just as easily backup their repositories via other outlets, including the hosting of their own. 
+All of these capabilities stem from the basic notion of a workspace.  The workspace is the developers first tool of managing the software they develop on any level.  Build your workspace with care.
 
+From the workspace, you can create programs from templates.  The first examples presented in this text only utilize blank and blinky template programs.  Most of the others require the utilization of network establishing components.  Some boards and devices build these features in and others don't.  The more interconnected your product is entails the need for further cyber security to protect it from abuse.
 
+In another chapter, this text shall introduce the notion of a team / distributed build system approach.  What makes such system different is the level of detail required to ensure that a produce developed by one developer integrates with the products of others.  Lastly, such systems should also enable distributed products to upgrade their software with confidence. 
 
-% subsubsection create_a_repository (end)
-
-\subsubsection{Workspaces} % (fold)
-\label{ssub:workspaces}
-
-The notion of a workspace simply gives provides some directory on the development computer.  A workspace is merely a directory in the user's home directory.  You can select any directory to act as a workspace.  
-
-This space allows developers to produce code and keep it organized.   By default, the installation of Mbed Studios produces the installation user's first workspace in their workspace.  For example, you might store a common MbedOS source for programs you build in the workspace.  Likewise, you can use the workspace to connect a library or several libraries used by programs written in the workspace.
-
-
-
-% subsubsection workspaces (end)
 
 \subsubsection{Creating A Program} % (fold)
 \label{ssub:creating_a_program}
@@ -139,36 +147,19 @@ This process is a simple file system operation combined with applications for yo
 
 % subsubsection importing_a_program (end)
 
+\subsubsection{Create a Repository} % (fold)
+\label{ssub:create_a_repository}
 
-\subsubsection{Importing Libraries} % (fold)
-\label{ssub:importing_libraries}
-ARM made importing a program rather simple by utilizing the Eclipse Theia platform.  The most common set of libraries import is the mBedOS itself.  This framework contains both the real-time operating system (RTOS) mBedOS and its fundamental C/C++ libraries.  It also contains libraries for other languages such as Python.
+We present software creation from a independent producers point of view.  Many corporations and government entities insist on their own repository tools.  For these entities, we can comprehend the need of such restrictions.  They have assests to protect and the finances to provide on property protection.  
 
-Demo:
+On the other hand, your work is often times things that you want the priviledge to reuse.  Reuse is one of the tenets of object-oriented programming.  When we restrict one of these tenets, we risk detriment to our profession.  
 
-\footnote{https://os.mbed.com/docs/mbed-studio/current/manage-libraries/index.html#importing-a-library}
+So, we go through a typical arrangement with to produce a repository for use in embedded development.  Providers can vary such as BeanStalk and GitHub.  Resources such as GitHub come in handy as mBed has much of their resources available through this resource.  However, ARM can just as easily backup their repositories via other outlets, including the hosting of their own. 
 
-% subsubsection importing_libraries (end)
 
-\subsection{Your Workspace} % (fold)
-\label{sub:your_workspace}
+% subsubsection create_a_repository (end)
 
-Borland made workspace directories a thing back in the 1980s and the Eclipse Foundation formulated much of its products operation around this concept.  Mbed Studio inherits this from its Eclipse Theia roots.
-
-A workspace is simply a directory that an IDE utilizes to manage its projects.  In the last 20 years, many have wrapped their version control working directory into thier workspace.  Mbed detects the artifacts from these version control systems (VCS) to determine which VCS the developer uses. Therefore, Mbed provides tools to interface with the VCS and facilitate management thereof.  
-
-Some developers adopt tendencies from their agile web application to utilize a dedicated build system.  These dedicated build systems work with version control systems to establish the notion of work code.  These systems track code to determine when it is in a working state and when it is not.  Many tools exist to determine what working state comprises.  Does the code compile?  Does the code pass unit tests?  For code trees off the main branch, what new features does this seperate branch examine and or present?
-
-For some embedded systems, it makes sense to include a dedicated build system with the product or interface thereof.  It provides users and technicians a mechanism to determine versions software that work together.  Therefore, the techician can choose configurations that meet customer needs.
-
-All of these capabilities stem from the basic notion of a workspace.  The workspace is the developers first tool of managing the software they develop on any level.  Build your workspace with care.
-
-From the workspace, you can create programs from templates.  The first examples presented in this text only utilize blank and blinky template programs.  Most of the others require the utilization of network establishing components.  Some boards and devices build these features in and others don't.  The more interconnected your product is entails the need for further cyber security to protect it from abuse.
-
-In another chapter, this text shall introduce the notion of a team / distributed build system approach.  What makes such system different is the level of detail required to ensure that a produce developed by one developer integrates with the products of others.  Lastly, such systems should also enable distributed products to upgrade their software with confidence. 
-
-% subsection your_workspace (end)
-
+\newpage
 \subsubsection{The simple C++ class} % (fold)
 \label{ssub:the_simple_c_class}
 
@@ -180,21 +171,22 @@ So, we create a simple class to spell out Hello World. %Let us first start from 
 
 
 \begin{lstlisting}
-	#include "mbed.h"
-	#include <iostream>
-	#include <cstdio>
-	#include <string>
+#include "mbed.h"
+#include <iostream>
+#include <cstdio>
+#include <string>
 
-	// main() runs in its own thread in the OS
-	int main()
-	{
-	    std::string shortCircuit = "Don't disassemble ";
-    
-	    std::cout << "Try 1 " << std::endl;
-	    std::cout << shortCircuit << " = number " << std::to_string(5) << "." << std::endl;
+// main() runs in its own thread in the OS
+int main()
+{
+    std::string shortCircuit = "Don't disassemble ";
+   
+    std::cout << "Try 1 " << std::endl;
+    std::cout << shortCircuit << " = number " << std::to_string(5) 
+		<< "." << std::endl;
 
-		return 0;
-	}
+	return 0;
+}
 \end{lstlisting}
 
 %  Reference to STM32's demo on Azure integration. https://event.on24.com/eventRegistration/EventLobbyServlet?target=reg20.jsp&referrer=&eventid=3033694&sessionid=1&key=56AB6F9781B7212E159AAF4866D4778C&regTag=&V2=false&sourcepage=register
@@ -204,7 +196,7 @@ In C++, there exists two notions of a string.  Most 1980's and 1990's students o
 A simple method of devising a C++ class includes the simplest program taught, namely ``Hello World.''  Some also pluck silly little phrases from 1980's movies like `Short Circuit'.  To illustrate a little mastery of data types, we add to the class some simple integer and floating point members.  
 
 A few things to remember in developing a C++ class.  One, we use the macro system.  Compilers complain if it finds the same class defined twice.  The include system needs the macros to ensure that a class is defined only once.  The define needs to differ in some way from the name of the class or struct (say an all caps form of the name, where as the name itself just starts with a capital letter).  Lastly, this example demonstrates a class with a primitive form of marshalling.
-
+\newpage
 \begin{lstlisting}
 	
 #include <iostream>
@@ -231,7 +223,6 @@ class HelloWorld
 } ;
 
 #endif 
-	#endif
 \end{lstlisting}
 
 % References:
@@ -252,43 +243,43 @@ class HelloWorld
 %Now, let us make give this program a class.  The premise is that we have some object that combines basic features together to form a cohesive sentence.  Let us take that cliche from the beloved 80's classic, ``Short Circuit.''  The cliche is ``Please don't disassemble number 5.''  This cliche has both a sentence and number in the statement.  Therefore, we want the class to assemble this sentence into something we can print.
 
 \begin{lstlisting}
-	std::string HelloWorld::marshal()
-	{
-		//std::string workingString = this->message;
-		//workingString += " = " + std::to_string(this->units);
-	    return (this->message + " = " + std::to_string(this->units) + " I cost " + to_string(cost) +".") ;
-	}
+std::string HelloWorld::marshal()
+{
+    return (this->message + " = " + std::to_string(this->units) + 
+				" I cost " + to_string(cost) +".") ;
+}
 \end{lstlisting}
 
 Thus, we develop the notion of concatination of strings.  The STL string object has a to\_string function that exists to make strings out of primatives.   In later chapters, we shall utilize the string object to parse simple language statements into objects and vise versa.  This method ``marshal'' simply shepards the text and simple data types as one simple sentence.  
-
+\newpage
 Then we simply have a new version of the program that sends the string to the C-output stream.  
 \begin{lstlisting}
-	#include "mbed.h"
-	#include <iostream>
-	#include <cstdio>
-	#include <string>
-	#include "helloWorldStruct.hpp"
+#include "mbed.h"
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include "helloWorldStruct.hpp"
 
-	// main() runs in its own thread in the OS
-	int main()
-	{
-	    HelloWorld alpha(5);
-	    std::string shortCircuit = "Don't disassemble ";
-	    HelloWorld beta(5, shortCircuit);
+// main() runs in its own thread in the OS
+int main()
+{
+    HelloWorld alpha(5);
+    std::string shortCircuit = "Don't disassemble ";
+    HelloWorld beta(5, shortCircuit);
 
-	    std::cout << "Try 1 " << std::endl;
-	    std::cout << alpha.marshal() << std::endl;
+    std::cout << "Try 1 " << std::endl;
+    std::cout << alpha.marshal() << std::endl;
 
-	    std::cout << "Try 2 " << std::endl;
-	    std::cout << beta.marshal() << std::endl; 
+    std::cout << "Try 2 " << std::endl;
+    std::cout << beta.marshal() << std::endl; 
 		
 
-	    std::cout << "Try 3 " << std::endl;
-	    std::cout << beta.getMessage() << " ." << beta.getUnits() << std::endl;
-			//}
-		return 0;
-	}
+    std::cout << "Try 3 " << std::endl;
+    std::cout << beta.getMessage() << " ." 
+		<< beta.getUnits() << std::endl;
+
+	return 0;
+}
 \end{lstlisting}
 Here we use the first constructor for an object called alpha.  We construct this object with merely the unit number.  We construct the second object (beta) with a message.   We then print these messages.  Note, the direct notion of just grab the members fails to print the units.  This is a stream issue in mbedOS.  
 
@@ -296,6 +287,35 @@ Here we use the first constructor for an object called alpha.  We construct this
 
 % subsubsection the_simple_c_class (end)
 
+
+% subsection your_workspace (end)
+
+
+
+\newpage
+\subsection{It is about the Libraries, Shhsss.} % (fold)
+\label{sub:it_is_about_the_libraries_shhsss}
+
+For any task associated with a MCU, ARM based micro-controllers require the libraries. ARM MCUs require the frameworks of the RTOS itself, in this case mBedOS. 
+
+Developers refactor their code as they get into development. These libraries serve as building blocks. This product explores basic library creation to benefit fellow developers and makers of products. 
+
+As we create libraries and programs, it behoves us to consider license programs and how to market our productions. We want the fruits of our labor to bring us profit. If we never make and sell things then we certainly shall not build profit.  If we horde what we make then we won't make profit, either.
+
+So we explore creating programs, importing existing libraries, and creating new libraries. Documentation of such products contributes to our fellow makers.  We make money from establishing those connections and making the software that connect to real life. 
+
+
+
+
+\subsubsection{Importing Libraries} % (fold)
+\label{ssub:importing_libraries}
+ARM made importing a program rather simple by utilizing the Eclipse Theia platform.  The most common set of libraries import is the mBedOS itself.  This framework contains both the real-time operating system (RTOS) mBedOS and its fundamental C/C++ libraries.  It also contains libraries for other languages such as Python.
+
+Demo:
+
+\footnote{https://os.mbed.com/docs/mbed-studio/current/manage-libraries/index.html#importing-a-library}
+
+% subsubsection importing_libraries (end)
 
 \subsubsection{Creating Libraries} % (fold)
 \label{ssub:creating_libraries}
