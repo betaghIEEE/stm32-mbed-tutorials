@@ -1895,3 +1895,4 @@ textbook-example-event-counter/BUILD/NUCLEO_F413ZH/ARMC6/mbed-os/connectivity/dr
 textbook-example-event-counter/BUILD/NUCLEO_F413ZH/ARMC6/mbed-os/connectivity/drivers/cellular/QUECTEL/BC95/QUECTEL_BC95.o
 textbook-example-event-counter/BUILD/NUCLEO_F413ZH/ARMC6/mbed-os/connectivity/drivers/cellular/QUECTEL/BG96/QUECTEL_BG96_CellularContext.d
 textbook-example-event-counter/BUILD/.mbedignore
+.theia/settings.json
