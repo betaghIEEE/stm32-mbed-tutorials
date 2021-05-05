@@ -12,18 +12,18 @@ int main()
     HelloWorld beta(5, 5.0, message);
 
 
-    std::cout  <<endl;
-    std::cout << "Try 1" << endl;
-    std::cout << message << " = number " << std::to_string(5) << endl;
+    std::cout  << std::endl;
+    std::cout << "Try 1" << std::endl;
+    std::cout << message << " = number " << std::to_string(5) << std::endl;
 
-    std::cout << endl;
-    std::cout << "Try alpha " << endl;
+    std::cout << std::endl;
+    std::cout << "Try alpha " << std::endl;
     std::cout << alpha.marshal() ;
 
 
-    std::cout << endl;
-    std::cout << "Try beta " << endl;
-    std::cout << beta.getUnits() << endl;
+    std::cout << std::endl;
+    std::cout << "Try beta " << std::endl;
+    std::cout << beta.getUnits() << std::endl;
     std::cout << beta.marshal() ;
 
     return 0;

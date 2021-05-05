@@ -32,7 +32,7 @@ HelloWorld::HelloWorld(int daUnit, float doCost, const std::string &daMessage)
 
 std::string HelloWorld::marshal()
 {
-    return (message + " = " + std::to_string(unit) + " I cost " + std::to_string(cost) + ".");
+    return (message + " = " + std::to_string(unit) + " I cost " + std::to_string(cost) + ".\n" );
 }
 
 std::string& HelloWorld::getMessage()
