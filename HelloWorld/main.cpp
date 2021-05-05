@@ -14,7 +14,7 @@ int main()
 
     std::cout  << std::endl;
     std::cout << "Try 1" << std::endl;
-    std::cout << message << " = number " << std::to_string(5) << std::endl;
+    std::cout << message << " = number " << std::to_string(3.14) << std::endl;
 
     std::cout << std::endl;
     std::cout << "Try alpha " << std::endl;
